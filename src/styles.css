@@ -1,0 +1,114 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * EEF Online Professional — Instrument Grade Monochrome design system.
+ * Dark, near-monochrome surface with blue accents.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: "Exo 2", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Exo 2", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root,
+.dark {
+  --radius: 0.25rem;
+
+  --background: oklch(0.196 0.054 264);   /* #0A1630 */
+  --foreground: oklch(0.882 0.024 248);   /* #CBD5E1 */
+  --surface: oklch(0.296 0.039 261);      /* #1E293B */
+  --card: oklch(0.296 0.039 261);
+  --card-foreground: oklch(1 0 0);        /* #FFFFFF headings */
+  --popover: oklch(0.296 0.039 261);
+  --popover-foreground: oklch(1 0 0);
+
+  /* EOP brand blue */
+  --primary: oklch(0.572 0.246 263);      /* #005BFF */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.434 0.218 266);    /* #003A9E */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.296 0.039 261);
+  --muted-foreground: oklch(0.824 0.014 248); /* #C8CDD7 metallic silver */
+  --accent: oklch(0.652 0.216 262);       /* #007AFF - More cohesive with primary blue */
+  --accent-foreground: oklch(0.196 0.054 264);
+
+  --gradient-brand: linear-gradient(135deg, var(--primary), var(--accent));
+  --gradient-deep: linear-gradient(180deg, color-mix(in oklab, var(--background) 85%, black), var(--background));
+  --shadow-brand: 0 20px 60px -20px color-mix(in oklab, var(--primary) 45%, transparent);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.494 0.018 257);       /* #5F6878 */
+  --input: oklch(0.494 0.018 257);
+  --ring: oklch(0.572 0.246 263);
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@utility animate-reveal {
+  animation: reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@utility animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
