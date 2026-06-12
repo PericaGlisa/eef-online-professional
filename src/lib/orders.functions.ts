@@ -118,48 +118,9 @@ export const submitOrder = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const orderNumber = `EOP-${Date.now().toString(36).toUpperCase()}`;
 
-    const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    // Logujemo porudžbinu u konzolu
+    console.log("[submitOrder] Nova porudžbina primljena", { orderNumber, data });
 
-    if (!LOVABLE_API_KEY || !RESEND_API_KEY) {
-      // Bez konfigurisanog Resend-a: logujemo i vraćamo uspeh, da UI ne pukne tokom postavljanja.
-      console.warn("[submitOrder] Resend nije konfigurisan, porudžbina nije poslata mejlom.", { orderNumber, data });
-      return { ok: true, orderNumber, emailed: false };
-    }
-
-    const send = async (to: string, subject: string, html: string) =>
-      fetch("https://connector-gateway.lovable.dev/resend/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
-          "X-Connection-Api-Key": RESEND_API_KEY,
-        },
-        body: JSON.stringify({ from: ORDER_FROM, to: [to], subject, html, reply_to: data.customer.email }),
-      });
-
-    const adminRes = await send(
-      ORDER_TO,
-      `Nova porudžbina ${orderNumber} — ${fmt(data.total)}`,
-      buildHtml(data, orderNumber),
-    );
-
-    if (!adminRes.ok) {
-      const body = await adminRes.text();
-      console.error("[submitOrder] Resend admin email failed", adminRes.status, body);
-      return { ok: false, orderNumber, error: "Slanje mejla nije uspelo. Pokušajte ponovo ili nas pozovite." };
-    }
-
-    // Best-effort potvrda kupcu — ne blokira porudžbinu
-    try {
-      await send(
-        data.customer.email,
-        `Potvrda porudžbine ${orderNumber} — EEF Online Professional`,
-        buildCustomerHtml(data, orderNumber),
-      );
-    } catch (e) {
-      console.warn("[submitOrder] customer confirmation failed", e);
-    }
-
-    return { ok: true, orderNumber, emailed: true };
+    // Vraćamo uspeh, bez slanja mejla za sada
+    return { ok: true, orderNumber, emailed: false };
   });

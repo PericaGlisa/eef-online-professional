@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
 
 function NotFoundComponent() {
@@ -38,9 +37,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -78,17 +74,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EEF Online Professional — Precizan inženjering" },
+      { title: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
       {
         name: "description",
         content:
-          "EEF Online Professional — laboratorijski burrovi, RoastSee analizatori i precizni instrumenti za najzahtevnije profesionalce u kafi na svetu.",
+          "EEF Online Professional — Vaš pouzdan partner za rezervne delove za ugostiteljstvo, aparate za kafu i domaće uređaje.",
       },
       { name: "author", content: "EEF Online Professional" },
       { property: "og:site_name", content: "EEF Online Professional" },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
+      {
+        property: "og:description",
+        content: "Vaš pouzdan partner za rezervne delove za ugostiteljstvo, aparate za kafu i domaće uređaje.",
+      },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0A1630" },
+      { name: "theme-color", content: "#005BFF" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -98,6 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
       },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
     ],
     scripts: [
       {
@@ -107,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "EEF Online Professional",
           description:
-            "Precizni instrumenti i burrovi vrhunskih performansi za specialty kafu.",
+            "Rezervni delovi za ugostiteljstvo, aparate za kafu i domaće uređaje.",
           url: "/",
           telephone: "+381 64 8222 651",
           email: "office@eop.rs",
@@ -136,8 +139,16 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { useRouterState } from "@tanstack/react-router";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+
+  // Always scroll to top on navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [routerState.location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
