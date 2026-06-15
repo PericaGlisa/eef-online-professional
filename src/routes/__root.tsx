@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "EEF Online Professional – Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje.",
       },
       { property: "og:image", content: "/og-image.svg" },
-      { property: "og:url", content: "https://eop.rs" },
+      { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
       { name: "twitter:description", content: "Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje." },
@@ -116,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "EEF Online Professional",
           description:
-            "Rezervni delovi za ugostiteljstvo, aparate za kafu i domaće uređaje.",
+            "Rezervni delovi za ugostiteljstvo, aparati za kafu i domaće uređaje.",
           url: "/",
           telephone: "+381 64 8222 651",
           email: "office@eop.rs",
@@ -124,26 +124,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="sr-Latn">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
