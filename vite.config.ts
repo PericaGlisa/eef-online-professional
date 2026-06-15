@@ -11,6 +11,24 @@ export default defineConfig({
     server: {
       port: 8080,
     },
+    ssr: {
+      external: [
+        '@tanstack/react-query',
+        '@tanstack/react-router',
+        '@tanstack/react-router-dom',
+        '@tanstack/react-start',
+      ],
+    },
+    build: {
+      rollupOptions: {
+        external: [
+          '@tanstack/react-query',
+          '@tanstack/react-router',
+          '@tanstack/react-router-dom',
+          '@tanstack/react-start',
+        ],
+      },
+    },
   },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
@@ -18,6 +36,14 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
-    preset: "netlify"
+    preset: "netlify",
+    rollupConfig: {
+      external: [
+        '@tanstack/react-query',
+        '@tanstack/react-router',
+        '@tanstack/react-router-dom',
+        '@tanstack/react-start',
+      ],
+    },
   }
 });
