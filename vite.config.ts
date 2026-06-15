@@ -22,8 +22,18 @@ export default defineConfig({
   nitro: isNetlify
     ? {
         preset: "netlify",
+        output: {
+          dir: ".output",
+          publicDir: ".output/public",
+        },
         rollup: {
-          external: ['@tanstack/react-router', '@tanstack/react-query', '@tanstack/react-start', '@tanstack/react-start-client'],
+          external: [
+            '@tanstack/react-router',
+            '@tanstack/react-query',
+            '@tanstack/react-start',
+            '@tanstack/react-start-client',
+            '@tanstack/router-plugin',
+          ],
         },
       }
     : {},
