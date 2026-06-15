@@ -4,10 +4,11 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { CartProvider } from "@/lib/cart";
@@ -74,22 +75,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
+      { title: "EEF Online Professional | Rezervni delovi, barista oprema i aparati za kafu" },
       {
         name: "description",
         content:
-          "EEF Online Professional — Vaš pouzdan partner za rezervne delove za ugostiteljstvo, aparate za kafu i domaće uređaje.",
+          "EEF Online Professional – Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje. Usluge održavanja i konsultacije.",
       },
+      { name: "keywords", content: "rezervni delovi, aparati za kafu, barista oprema, ugostiteljstvo, domaći uređaji, održavanje" },
       { name: "author", content: "EEF Online Professional" },
       { property: "og:site_name", content: "EEF Online Professional" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
       {
         property: "og:description",
-        content: "Vaš pouzdan partner za rezervne delove za ugostiteljstvo, aparate za kafu i domaće uređaje.",
+        content: "EEF Online Professional – Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje.",
       },
       { property: "og:image", content: "/og-image.svg" },
+      { property: "og:url", content: "https://eop.rs" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
+      { name: "twitter:description", content: "Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje." },
+      { name: "twitter:image", content: "/og-image.svg" },
       { name: "theme-color", content: "#005BFF" },
     ],
     links: [
@@ -139,16 +145,21 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-import { useRouterState } from "@tanstack/react-router";
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
+  const [isMounted, setIsMounted] = useState(false);
 
   // Always scroll to top on navigation
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [routerState.location.pathname]);
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      window.scrollTo(0, 0);
+    }
+  }, [routerState.location.pathname, isMounted]);
 
   return (
     <QueryClientProvider client={queryClient}>

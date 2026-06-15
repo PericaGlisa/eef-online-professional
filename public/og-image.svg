@@ -1,5 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" style="width:1200px; height:630px; background:#005BFF;">
-  <rect width="1200" height="630" fill="#005BFF" />
-  <text x="600" y="280" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="80" font-weight="800">EEF Online Professional</text>
-  <text x="600" y="370" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="500">Rezervni delovi za ugostiteljstvo i dom</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" style="width: 1200px; height: 630px;">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A1630"/>
+      <stop offset="100%" stop-color="#0F2145"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#005BFF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#005BFF" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1000" cy="100" r="200" fill="#005BFF" opacity="0.1"/>
+  <circle cx="200" cy="530" r="250" fill="#007AFF" opacity="0.08"/>
+  
+  <g filter="url(#shadow)">
+    <rect x="150" y="180" width="900" height="270" rx="20" fill="#1E293B" stroke="#5F6878" stroke-width="2"/>
+  </g>
+
+  <text x="600" y="270" text-anchor="middle" fill="white" font-family="Exo 2, Inter, Arial, sans-serif" font-size="72" font-weight="800">
+    EEF Online Professional
+  </text>
+  <text x="600" y="330" text-anchor="middle" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="500">
+    Rezervni delovi za ugostiteljstvo i dom
+  </text>
+  <text x="600" y="390" text-anchor="middle" fill="#007AFF" font-family="Exo 2, Inter, Arial, sans-serif" font-size="24" font-weight="700">
+    Barista oprema • Aparati za kafu • Usluge održavanja
+  </text>
 </svg>

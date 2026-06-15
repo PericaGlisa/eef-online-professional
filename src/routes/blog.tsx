@@ -27,12 +27,12 @@ const POSTS = [
     tag: "ODRŽAVANJE",
     title: "Kako pravilno održavati aparate za kafu i produžiti im vek trajanja.",
     excerpt:
-      "Saveti za redovno čišćenje, zamenu filtera i održavanje aparata kako bi radili na maksimalnoj performansi godinama.",
+      "Saveti za redovno čišćenje, zamenu filtera i održavanje aparata kako bi imali maksimalne performanse godinama.",
     date: "18.04.2026.",
     read: "8 min",
   },
   {
-    tag: "SAVJETI",
+    tag: "SAVETI",
     title: "Koju opremu treba svaki profesionalni kafić da ima u 2026. godini.",
     excerpt:
       "Kompletna lista opreme od osnovnih aparata do naprednih rešenja za kvalitet i efikasnost u radu.",
@@ -51,7 +51,7 @@ const POSTS = [
     tag: "VODA",
     title: "Zašto je kvalitet vode ključan za pravljenje savršene kafe i čuvanje aparata.",
     excerpt:
-      "Sve o omekšivačima, filtririma i kvalitetu vode koji utiče na ukus kafe i vek trajanje vašeg aparata.",
+      "Sve o omekšivačima, filterima i kvalitetu vode koji utiče na ukus kafe i vek trajanja vašeg aparata.",
     date: "14.11.2025.",
     read: "9 min",
   },

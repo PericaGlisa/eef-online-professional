@@ -109,7 +109,7 @@ function ProductPage() {
       <section className="py-24">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-4">POTPUNA PODRŠKA</div>
-          <h2 className="text-3xl font-black tracking-tight mb-6">Potreban vam je dodatni informacija?</h2>
+          <h2 className="text-3xl font-black tracking-tight mb-6">Potrebna vam je dodatna informacija?</h2>
           <p className="text-muted-foreground text-sm leading-relaxed mb-8">
             Za sve nejasnoće, prilagođene konfiguracije ili veće količine, slobodno nas kontaktirajte.
           </p>

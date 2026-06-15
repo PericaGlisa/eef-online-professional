@@ -156,15 +156,22 @@ const SLIDE_INTERVAL = 7000;
 
 function Home() {
   const [active, setActive] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
   const activeOffer = OFFERS[active];
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % OFFERS.length);
     }, SLIDE_INTERVAL);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isMounted]);
 
   const previousSlide = () => {
     setActive((current) => (current - 1 + OFFERS.length) % OFFERS.length);
@@ -442,7 +449,7 @@ function Home() {
                 [ Naša oprema ]
               </div>
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-card-foreground">
-                Koje koristimo u svakodnevnom radu.
+                Koju koristimo u svakodnevnom radu.
               </h2>
             </div>
             <Link

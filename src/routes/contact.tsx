@@ -8,12 +8,12 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Razgovarajte sa EEF Online Professional inženjerskim timom o HyperBurrs proizvodima, RoastSee analizatoru, SOU SIK P-1, oštrenju ili bespoke inženjerskim projektima.",
+          "Kontaktirajte EEF Online Professional za rezervne delove, aparate za kafu, barista opremu i profesionalne usluge. Odgovoramo brzo!",
       },
       { property: "og:title", content: "Kontakt — EEF Online Professional" },
       {
         property: "og:description",
-        content: "Na inženjerske upite odgovaramo u roku od dva radna dana.",
+        content: "Ponudimo rezervne delove, aparate za kafu, barista opremu i usluge.",
       },
       { property: "og:url", content: "/contact" },
     ],
@@ -23,21 +23,21 @@ export const Route = createFileRoute("/contact")({
 });
 
 const TOPICS = [
-  "HyperBurrs katalog",
-  "RoastSee analizator",
-  "SOU SIK P-1 prijava",
-  "Servis oštrenja burrova",
-  "Prilagođen inženjering",
-  "Mediji / štampa",
+  "Rezervni delovi",
+  "Aparati za kafu",
+  "Barista oprema",
+  "Servis i održavanje",
+  "Ugostiteljska oprema",
+  "Ostalo",
 ];
 
 function Contact() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="KONTAKT / 08"
-        title="Na inženjerske upite odgovaramo u roku od dva radna dana."
-        intro="Navedite temu i obim vaše laboratorije. Upit prosleđujemo inženjeru koji zna odgovor, ne redu čekanja."
+        eyebrow="KONTAKT"
+        title="Kontaktirajte nas za sve informacije o proizvodima i uslugama."
+        intro="EEF Online Professional je vaš pouzdan partner za rezervne delove, aparate za kafu, barista opremu i profesionalne usluge. Odgovoramo u najkraćem roku!"
       />
 
       <section className="py-16 border-b border-border">
@@ -100,13 +100,13 @@ function Contact() {
               type="submit"
               className="bg-foreground text-background font-mono text-xs px-8 py-4 uppercase font-bold tracking-widest hover:bg-primary transition-colors"
             >
-              Pošalji upit
+              Pošalji poruku
             </button>
           </form>
 
           {/* Side */}
           <div className="lg:col-span-5 space-y-12">
-            <Block label="INŽENJERING">
+            <Block label="KONTAKT">
               <a href="mailto:office@eop.rs" className="hover:text-primary">office@eop.rs</a>
               <br />
               <a href="tel:+381648222651" className="hover:text-primary">064 8222 651</a>
@@ -115,12 +115,12 @@ function Contact() {
               <a href="https://eop.rs" className="hover:text-primary">eop.rs</a>
             </Block>
             <Block label="RADNO VREME">
-              Pon–Pet // 09.00 — 18.00 CET
+              Pon–Pet // 07:30 — 15:30
               <br />
               Van radnog vremena uz najavu
             </Block>
             <div className="pt-8 border-t border-border font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
-              EEF Online Professional // GMT+1
+              EEF Online Professional // GMT+1 / CET (Beograd)
             </div>
           </div>
         </div>

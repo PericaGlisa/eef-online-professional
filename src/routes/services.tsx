@@ -32,15 +32,15 @@ const SERVICES = [
     id: "rezervni-delovi",
     title: "Rezervni delovi",
     description:
-      "Širok asortiman originalnih i zamenskih delova za sve vrste aparata. Od najmanjih zavrtnji do celih sistema — mi imamo ono što vam treba za neprekidani rad.",
+      "Širok asortiman originalnih i zamenskih delova za sve vrste aparata. Od najmanjih zavrtnja do celih sistema — mi imamo ono što vam treba za neprekidni rad.",
     image: service1,
-    features: ["Originalni delovi", "Brza dostava", "Savjetovanje"],
+    features: ["Originalni delovi", "Brza dostava", "Savetovanje"],
   },
   {
     id: "barista-oprema",
     title: "Barista oprema",
     description:
-      "Profesionalna oprema za bariste i kafiće. Od tamplara do mlinova, sve što vam treba za pravljenje savršene kafe.",
+      "Profesionalna oprema za bariste i kafiće. Od tampera do mlinova, sve što vam treba za pravljenje savršene kafe.",
     image: service2,
     features: ["Vrhunski kvalitet", "Profesionalna oprema", "Garancija"],
   },
@@ -91,7 +91,7 @@ function Services() {
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
               Od rezervnih delova do profesionalne opreme — sve na jednom mestu, 
-              uz podršku stručnjaka koji razumiju vaš biznis.
+              uz podršku stručnjaka koji razumeju vaš biznis.
             </p>
           </div>
 
@@ -110,7 +110,9 @@ function Services() {
                 </div>
                 <div className="p-8">
                   <div className="font-mono text-primary text-[10px] mb-3 uppercase tracking-widest">
-                    {service.id.toUpperCase()}
+                    {service.id === "omeksivaci-vode" 
+                      ? "OMEKŠIVAČI-VODE" 
+                      : service.id.toUpperCase()}
                   </div>
                   <h3 className="text-xl font-black tracking-tight mb-4">
                     {service.title}
@@ -159,7 +161,7 @@ function Services() {
               {
                 n: "01",
                 h: "Konsultacija",
-                p: "Slušamo vaše potrebe i pružamo personalizovane savjete.",
+                p: "Slušamo vaše potrebe i pružamo personalizovane savete.",
               },
               {
                 n: "02",
@@ -201,7 +203,7 @@ function Services() {
             [ SPREMNI ZA SARADNJU? ]
           </div>
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter">
-            Kontaktirajte nas i započnimo.
+            Kontaktirajte nas i započnimo saradnju.
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Bez obzira da li vam treba jedan rezervni deo ili kompletno
@@ -209,7 +211,7 @@ function Services() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-xs px-10 py-5 uppercase font-bold tracking-widest hover:bg-foreground transition-colors"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-xs px-10 py-6 uppercase font-bold tracking-widest hover:bg-foreground transition-colors"
           >
             Pošaljite upit
             <span>→</span>
