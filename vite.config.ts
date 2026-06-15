@@ -6,6 +6,8 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const isNetlify = process.env.NETLIFY === "true" || process.env.NODE_ENV === "production";
+
 export default defineConfig({
   vite: {
     server: {
@@ -17,7 +19,12 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  nitro: {
-    preset: "netlify",
-  },
+  nitro: isNetlify
+    ? {
+        preset: "netlify",
+        rollup: {
+          external: ['@tanstack/react-router', '@tanstack/react-query', '@tanstack/react-start', '@tanstack/react-start-client'],
+        },
+      }
+    : {},
 });
