@@ -17,4 +17,10 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  nitro: {
+    preset: "netlify",
+    prerender: {
+      routes: ["/", "/prodavnica", "/services", "/o-nama", "/blog", "/contact"],
+    },
+  },
 });
