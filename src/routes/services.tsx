@@ -80,17 +80,17 @@ function Services() {
       />
 
       {/* Clean Services Grid */}
-      <section className="border-b border-border py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16 text-center">
-            <div className="font-mono text-primary text-xs mb-4 tracking-widest">
+      <section className="border-b border-border py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="mb-12 md:mb-16 text-center">
+            <div className="font-mono text-primary text-[10px] md:text-xs mb-4 tracking-widest">
               [ SVE USLUGE ]
             </div>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-6">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 md:mb-6">
               Kompletno rešenje za sve vaše potrebe.
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              Od rezervnih delova do profesionalne opreme — sve na jednom mestu, 
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+              Od rezervnih delova do profesionalne opreme — sve na jednom mestu,
               uz podršku stručnjaka koji razumeju vaš biznis.
             </p>
           </div>
@@ -108,19 +108,19 @@ function Services() {
                     className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-8">
+                <div className="p-5 md:p-8">
                   <div className="font-mono text-primary text-[10px] mb-3 uppercase tracking-widest">
-                    {service.id === "omeksivaci-vode" 
-                      ? "OMEKŠIVAČI-VODE" 
+                    {service.id === "omeksivaci-vode"
+                      ? "OMEKŠIVAČI-VODE"
                       : service.id.toUpperCase()}
                   </div>
-                  <h3 className="text-xl font-black tracking-tight mb-4">
+                  <h3 className="text-lg md:text-xl font-black tracking-tight mb-3 md:mb-4">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-5 md:mb-6">
                     {service.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-5 md:mb-6">
                     {service.features.map((f) => (
                       <span
                         key={f}
@@ -132,7 +132,7 @@ function Services() {
                   </div>
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest border-b border-transparent text-foreground hover:border-primary hover:text-primary transition-colors"
+                    className="inline-flex items-center gap-2 font-mono text-[10px] md:text-[11px] uppercase tracking-widest border-b border-transparent text-foreground hover:border-primary hover:text-primary transition-colors"
                   >
                     Kontaktirajte nas
                     <span>→</span>
@@ -145,18 +145,18 @@ function Services() {
       </section>
 
       {/* Process */}
-      <section className="py-24 bg-surface border-b border-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12">
-            <div className="font-mono text-primary text-xs mb-4 tracking-widest">
+      <section className="py-16 md:py-24 bg-surface border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="mb-8 md:mb-12">
+            <div className="font-mono text-primary text-[10px] md:text-xs mb-4 tracking-widest">
               [ KAKO RADIMO ]
             </div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter mb-4">
               Jednostavno, brzo i profesionalno.
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid gap-8 md:grid-cols-4">
             {[
               {
                 n: "01",
@@ -183,7 +183,7 @@ function Services() {
                 key={step.n}
                 className={`space-y-4 ${i > 0 ? "md:border-l md:border-border md:pl-8" : ""}`}
               >
-                <div className="font-mono text-primary text-xs">
+                <div className="font-mono text-primary text-[10px] md:text-xs">
                   [ {step.n} ]
                 </div>
                 <h3 className="text-lg font-bold tracking-tight">{step.h}</h3>
@@ -197,21 +197,21 @@ function Services() {
       </section>
 
       {/* CTA */}
-      <section className="py-24">
-        <div className="max-w-3xl mx-auto px-6 text-center space-y-8">
-          <div className="font-mono text-primary text-xs tracking-widest">
+      <section className="py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-4 md:px-6 text-center space-y-6 md:space-y-8">
+          <div className="font-mono text-primary text-[10px] md:text-xs tracking-widest">
             [ SPREMNI ZA SARADNJU? ]
           </div>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tighter">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter">
             Kontaktirajte nas i započnimo saradnju.
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
             Bez obzira da li vam treba jedan rezervni deo ili kompletno
             rešenje za vaš objekat — mi smo tu za vas.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-xs px-10 py-6 uppercase font-bold tracking-widest hover:bg-foreground transition-colors"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[10px] md:text-xs px-8 md:px-10 py-4 md:py-6 uppercase font-bold tracking-widest hover:bg-foreground transition-colors"
           >
             Pošaljite upit
             <span>→</span>

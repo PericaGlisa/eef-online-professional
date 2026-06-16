@@ -202,30 +202,30 @@ function Home() {
           </div>
         ))}
 
-        <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-6 py-12 md:py-20">
-          <div className="animate-reveal max-w-4xl pt-12 md:pt-32">
-            <div className="mb-6 inline-flex items-center gap-3 border border-primary/30 bg-background/60 px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.25em] text-accent backdrop-blur-xl">
+        <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 py-8 md:px-6 md:py-20">
+          <div className="animate-reveal max-w-4xl pt-8 md:pt-32">
+            <div className="mb-4 md:mb-6 inline-flex items-center gap-2 md:gap-3 border border-primary/30 bg-background/60 px-3 md:px-5 py-2 md:py-2.5 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-accent backdrop-blur-xl">
               <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
               {activeOffer.eyebrow}
             </div>
-            <h1 className="text-5xl font-black leading-[0.9] tracking-tighter text-card-foreground md:text-7xl lg:text-8xl">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black leading-[0.9] tracking-tighter text-card-foreground">
               {activeOffer.heroTitle}
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-foreground/85 md:text-xl">
+            <p className="mt-6 md:mt-8 max-w-2xl text-base md:text-lg lg:text-xl leading-relaxed text-foreground/85">
               {activeOffer.body}
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 md:mt-10 flex flex-wrap gap-3 md:gap-4">
               <Link
                 to="/prodavnica"
-                className="group inline-flex items-center justify-center gap-3 bg-primary px-8 py-5 font-display text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all hover:bg-accent hover:text-accent-foreground"
+                className="group inline-flex items-center justify-center gap-2 md:gap-3 bg-primary px-6 md:px-8 py-4 md:py-5 font-display text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all hover:bg-accent hover:text-accent-foreground"
               >
-                <activeOffer.Icon className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
+                <activeOffer.Icon className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:-translate-x-0.5" />
                 Pregled ponude
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ChevronRight className="h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/contact"
-                className="group inline-flex items-center justify-center border border-foreground/30 bg-background/50 px-8 py-5 font-display text-xs font-bold uppercase tracking-[0.2em] text-foreground backdrop-blur-xl transition-all hover:border-primary hover:text-accent hover:bg-background/70"
+                className="group inline-flex items-center justify-center border border-foreground/30 bg-background/50 px-6 md:px-8 py-4 md:py-5 font-display text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-foreground backdrop-blur-xl transition-all hover:border-primary hover:text-accent hover:bg-background/70"
               >
                 Pošaljite upit
               </Link>
@@ -239,7 +239,7 @@ function Home() {
                   key={offer.title}
                   type="button"
                   onClick={() => setActive(index)}
-                  className={`group relative min-h-[140px] overflow-hidden border bg-background/40 p-0 text-left transition-all ${
+                  className={`group relative min-h-[120px] md:min-h-[140px] overflow-hidden border bg-background/40 p-0 text-left transition-all ${
                     index === active
                       ? "border-primary bg-primary/10"
                       : "border-foreground/15 hover:border-primary/40"
@@ -252,9 +252,9 @@ function Home() {
                     className="absolute inset-0 h-full w-full object-cover opacity-40 transition-all group-hover:opacity-60"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/30 to-transparent" />
-                  <div className="relative flex h-full flex-col justify-between p-5">
+                  <div className="relative flex h-full flex-col justify-between p-4 md:p-5">
                     <offer.Icon
-                      className={`h-6 w-6 transition-colors ${
+                      className={`h-5 w-5 md:h-6 md:w-6 transition-colors ${
                         index === active ? "text-primary" : "text-accent"
                       }`}
                       aria-hidden
@@ -300,14 +300,14 @@ function Home() {
       </section>
 
       {/* Category Cards - Perfectly Identical */}
-      <section className="border-b border-border bg-surface py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-16 grid gap-6 border-b border-border pb-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+      <section className="border-b border-border bg-surface py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mb-12 md:mb-16 grid gap-6 border-b border-border pb-8 md:pb-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <div className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-accent">
+              <div className="mb-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-accent">
                 [ Ponuda rezervnih delova ]
               </div>
-              <h2 className="text-4xl font-black tracking-tighter text-card-foreground md:text-5xl">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter text-card-foreground">
                 Sve ključne kategorije na jednom mestu.
               </h2>
             </div>
@@ -331,18 +331,18 @@ function Home() {
                     className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <offer.Icon className="absolute bottom-6 left-6 h-9 w-9 text-accent" aria-hidden />
+                  <offer.Icon className="absolute bottom-4 md:bottom-6 left-4 md:left-6 h-7 md:h-9 w-7 md:w-9 text-accent" aria-hidden />
                 </div>
-                <div className="flex flex-col justify-between p-7 min-h-[220px]">
+                <div className="flex flex-col justify-between p-5 md:p-7 min-h-[180px] md:min-h-[220px]">
                   <div className="space-y-3">
                     <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
                       {offer.eyebrow}
                     </div>
-                    <h3 className="text-2xl font-bold tracking-tight text-card-foreground">
+                    <h3 className="text-xl md:text-2xl font-bold tracking-tight text-card-foreground">
                       {offer.title}
                     </h3>
                   </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground mt-4">
+                  <p className="text-sm leading-relaxed text-muted-foreground mt-3 md:mt-4">
                     {offer.body}
                   </p>
                 </div>
@@ -353,13 +353,13 @@ function Home() {
       </section>
 
       {/* Premium 2-Column Services Grid with All Buttons */}
-      <section className="border-b border-border bg-background py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12">
+      <section className="border-b border-border bg-background py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mb-8 md:mb-12">
             <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
               [ Naše usluge ]
             </div>
-            <h2 className="text-3xl font-black tracking-tighter text-card-foreground md:text-4xl">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-card-foreground">
               Kompletno rešenje za vašu opremu.
             </h2>
           </div>
@@ -379,22 +379,22 @@ function Home() {
                     className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-                    <div className="mb-6 inline-flex h-20 w-20 items-center justify-center bg-primary/20 backdrop-blur-md border border-primary/30">
-                      <service.icon className="h-10 w-10 text-primary" aria-hidden="true" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10 lg:p-12">
+                    <div className="mb-4 md:mb-6 inline-flex h-16 md:h-20 w-16 md:w-20 items-center justify-center bg-primary/20 backdrop-blur-md border border-primary/30">
+                      <service.icon className="h-7 md:h-10 w-7 md:w-10 text-primary" aria-hidden="true" />
                     </div>
-                    <h3 className="mb-4 text-3xl md:text-4xl font-black tracking-tight text-card-foreground">
+                    <h3 className="mb-3 md:mb-4 text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-card-foreground">
                       {service.title}
                     </h3>
-                    <p className="max-w-xl text-base md:text-lg leading-relaxed text-foreground/85">
+                    <p className="max-w-xl text-sm md:text-base lg:text-lg leading-relaxed text-foreground/85">
                       {service.body}
                     </p>
                     <Link
                       to="/services"
-                      className="mt-8 inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.25em] transition-all hover:bg-accent hover:text-accent-foreground"
+                      className="mt-6 md:mt-8 inline-flex items-center gap-2 md:gap-3 bg-primary text-primary-foreground px-6 md:px-8 py-3 md:py-4 font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] transition-all hover:bg-accent hover:text-accent-foreground"
                     >
                       Saznaj više
-                      <ChevronRight className="h-4 w-4" />
+                      <ChevronRight className="h-3 md:h-4 w-3 md:w-4" />
                     </Link>
                   </div>
                 </div>
@@ -415,14 +415,14 @@ function Home() {
                     className="h-full w-full object-cover transition-all duration-500 group-hover:scale-108"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                    <div className="mb-4 inline-flex h-14 w-14 items-center justify-center bg-primary/15 backdrop-blur">
-                      <service.icon className="h-7 w-7 text-primary" aria-hidden="true" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 lg:p-8">
+                    <div className="mb-3 md:mb-4 inline-flex h-12 md:h-14 w-12 md:w-14 items-center justify-center bg-primary/15 backdrop-blur">
+                      <service.icon className="h-5 md:h-7 w-5 md:w-7 text-primary" aria-hidden="true" />
                     </div>
-                    <h3 className="mb-2 text-2xl font-black tracking-tight text-card-foreground">
+                    <h3 className="mb-2 text-xl md:text-2xl font-black tracking-tight text-card-foreground">
                       {service.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+                    <p className="text-sm leading-relaxed text-foreground/80 mb-3 md:mb-4">
                       {service.body}
                     </p>
                     <Link
@@ -430,7 +430,7 @@ function Home() {
                       className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-accent transition-all hover:text-primary"
                     >
                       Saznaj više
-                      <ChevronRight className="h-3.5 w-3.5" />
+                      <ChevronRight className="h-3 w-3 md:h-3.5 md:w-3.5" />
                     </Link>
                   </div>
                 </div>
