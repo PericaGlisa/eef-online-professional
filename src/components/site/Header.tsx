@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
 import { 
@@ -91,6 +91,20 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState<string | null>(null); // 'services' or 'prodavnica'
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (route: string) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    setMegaMenuOpen(route);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setMegaMenuOpen(null);
+    }, 150); // 150ms delay before closing
+  };
 
   // Prevent body scrolling when mobile menu is open
   useEffect(() => {
@@ -104,6 +118,15 @@ export function Header() {
     };
   }, [mobileMenuOpen]);
 
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
@@ -115,17 +138,16 @@ export function Header() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-7 font-display font-medium text-[11px] uppercase tracking-widest text-muted-foreground">
           {NAV.map((n) => (
-            <div key={n.to} className="relative">
+            <div key={n.to} className="relative" onMouseEnter={n.to === "/services" || n.to === "/prodavnica" ? () => handleMouseEnter(n.to) : undefined} onMouseLeave={handleMouseLeave}>
               {n.to === "/services" || n.to === "/prodavnica" ? (
-                <button
-                  onMouseEnter={() => setMegaMenuOpen(n.to)}
-                  onMouseLeave={() => setMegaMenuOpen(null)}
-                  onClick={() => setMegaMenuOpen(megaMenuOpen === n.to ? null : n.to)}
+                <Link
+                  to={n.to}
                   className="hover:text-foreground transition-all duration-200 flex items-center gap-1"
+                  activeProps={{ className: "text-foreground" }}
                 >
                   {n.label.toUpperCase()}
                   <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${megaMenuOpen === n.to ? "rotate-180" : ""}`} />
-                </button>
+                </Link>
               ) : (
                 <Link
                   to={n.to}
@@ -169,8 +191,12 @@ export function Header() {
 
       {/* Mega Menus */}
       <div
-        onMouseEnter={() => {}}
-        onMouseLeave={() => setMegaMenuOpen(null)}
+        onMouseEnter={() => {
+          if (closeTimeoutRef.current) {
+            clearTimeout(closeTimeoutRef.current);
+          }
+        }}
+        onMouseLeave={handleMouseLeave}
         className="absolute left-0 right-0"
       >
         {/* Prodavnica Mega Menu */}
