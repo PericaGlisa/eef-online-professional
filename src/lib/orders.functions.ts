@@ -106,7 +106,7 @@ function buildCustomerHtml(data: OrderInput, orderNumber: string) {
       <p>Naš tim će vas u najkraćem roku kontaktirati radi potvrde dostupnosti, dostave i načina plaćanja.</p>
       <p style="margin-top:16px"><b>Ukupno:</b> ${fmt(data.total)}</p>
       <p style="margin-top:24px;font-size:12px;color:#64748b">
-        Za sve dodatne informacije: <a href="mailto:office@eop.rs">office@eop.rs</a> · 064 8222 651
+        Za sve dodatne informacije: <a href="mailto:office@eop.rs" style="color:#005BFF;text-decoration:underline">office@eop.rs</a> · <a href="tel:+381648222651" style="color:#005BFF;text-decoration:underline">064 8222 651</a>
       </p>
     </div>
   </div>

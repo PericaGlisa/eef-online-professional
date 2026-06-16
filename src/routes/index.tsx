@@ -62,29 +62,29 @@ export const Route = createFileRoute("/")({
 const OFFERS = [
   {
     title: "Ugostiteljska oprema",
-    body: "Kvalitetni rezervni delovi za opremu u ugostiteljstvu, koja garantuje stabilnost i dugovečan rad vašeg poslovanja.",
+    body: "Vrhunske komponente za termičku i rashladnu ugostiteljsku opremu koje garantuju besprekornu stabilnost i kontinuitet rada vašeg restorana ili bara.",
     image: ugostiteljskaOprema,
     eyebrow: "Ugostiteljstvo i horeca",
     stat: "Servisna stabilnost",
-    heroTitle: "Rezervni delovi za ugostiteljstvo.",
+    heroTitle: "Profesionalni delovi za ugostiteljstvo.",
     Icon: Wrench,
   },
   {
-    title: "Aparati za kafu i vending oprema",
-    body: "Efikasne zamene za vašu barista opremu, kako bi se uvek vodilo računa o savršenoj kafi.",
+    title: "Aparati za kafu i espresso oprema",
+    body: "Zaptivke glave grupe, precizna sita, tuševi i rezervni delovi za vrhunske espresso aparate. Sve što vam treba za stabilnu ekstrakciju i savršen espresso.",
     image: aparatiZaKafu,
     eyebrow: "Barista i vending",
     stat: "Kontinuitet rada",
-    heroTitle: "Vrhunska oprema za savršenu kafu.",
+    heroTitle: "Oprema za bariste i espresso sisteme.",
     Icon: Coffee,
   },
   {
     title: "Rezervni delovi za kućne aparate",
-    body: "Trajna podrška za vaše kućne aparate — od hladnjaka do mašina za pranje, produžava njihov vek i održava vrhunsku performansu.",
+    body: "Precizni rezervni delovi za kućne espresso aparate, mlinove i kućnu tehniku. Vratite fabričke performanse vašim omiljenim uređajima.",
     image: rezervniDelovi,
     eyebrow: "Kućni aparati",
     stat: "Duža upotreba",
-    heroTitle: "Produžite život svom kućnom aparatu.",
+    heroTitle: "Originalni delovi za kućne uređaje.",
     Icon: HomeIcon,
   },
 ] as const;
@@ -92,31 +92,31 @@ const OFFERS = [
 const SERVICE_TILES = [
   {
     title: "Rezervni delovi",
-    body: "Komponente za brzu zamenu, servis i nastavak rada bez dugog zastoja.",
+    body: "Originalne komponente za ugostiteljsku opremu, pumpe, grejače, ventile i elektroniku za brz servis.",
     image: serviceRezervniDelovi,
     icon: PackageCheck,
   },
   {
     title: "Barista oprema",
-    body: "Alati, pribor i oprema za stabilan rad lokala i doslednu pripremu kafe.",
+    body: "Precizna sita (IMS, VST), tuševi grupe, portafiltri, tamperi i ostali profesionalni pribor za bariste.",
     image: serviceBaristaOprema,
     icon: Coffee,
   },
   {
     title: "Aparati",
-    body: "Kompletna rešenja za profesionalnu pripremu kafe i ugostiteljske objekte.",
+    body: "Distribucija i servis profesionalnih espresso aparata, mlinova i prateće barske opreme renomiranih brendova.",
     image: serviceAparati,
     icon: Zap,
   },
   {
     title: "Hemija",
-    body: "Sredstva za čišćenje, održavanje i zaštitu opreme i površina.",
+    body: "Profesionalna hemijska sredstva za dekalcifikaciju, pranje grupa (backflush) i održavanje higijene mlinova.",
     image: serviceHemija,
     icon: Beaker,
   },
   {
     title: "Omekšivači vode",
-    body: "Sistemi za filtriranje i omekšavanje vode za bolji ukus i zaštitu opreme.",
+    body: "BWT Bestmax i Brita profesionalni sistemi za filtraciju vode koji sprečavaju kamenac i štite opremu.",
     image: serviceOmeksivaci,
     icon: Droplets,
   },
@@ -208,7 +208,7 @@ function Home() {
               <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
               {activeOffer.eyebrow}
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black leading-[0.9] tracking-tighter text-card-foreground">
+            <h1 className="font-display text-3xl md:text-5xl lg:text-7xl font-bold leading-[1.0] tracking-tight text-card-foreground">
               {activeOffer.heroTitle}
             </h1>
             <p className="mt-6 md:mt-8 max-w-2xl text-base md:text-lg lg:text-xl leading-relaxed text-foreground/85">
@@ -307,7 +307,7 @@ function Home() {
               <div className="mb-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-accent">
                 [ Ponuda rezervnih delova ]
               </div>
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter text-card-foreground">
+              <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-card-foreground">
                 Sve ključne kategorije na jednom mestu.
               </h2>
             </div>
@@ -359,7 +359,7 @@ function Home() {
             <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
               [ Naše usluge ]
             </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-card-foreground">
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-card-foreground">
               Kompletno rešenje za vašu opremu.
             </h2>
           </div>
@@ -448,7 +448,7 @@ function Home() {
               <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
                 [ Naša oprema ]
               </div>
-              <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-card-foreground">
+              <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-card-foreground">
                 Koju koristimo u svakodnevnom radu.
               </h2>
             </div>
@@ -503,7 +503,7 @@ function Home() {
       {/* CTA Section - Premium */}
       <section className="bg-background py-24">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="mb-6 text-4xl font-black tracking-tighter text-card-foreground md:text-5xl">
+          <h2 className="font-display mb-6 text-4xl font-bold tracking-tight text-card-foreground md:text-5xl">
             Spremni za saradnju.
           </h2>
           <p className="mb-10 max-w-2xl mx-auto text-lg leading-relaxed text-muted-foreground">
