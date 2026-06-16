@@ -62,11 +62,35 @@ const MEGA_MENU_ITEMS = [
   }
 ];
 
+const PRODAVNICA_MEGA_MENU_ITEMS = [
+  {
+    id: "ugostiteljska-oprema",
+    title: "Ugostiteljska oprema",
+    description: "Kvalitetni rezervni delovi za opremu u ugostiteljstvu",
+    icon: Wrench,
+    to: "/prodavnica"
+  },
+  {
+    id: "aparati-za-kafu",
+    title: "Aparati za kafu i vending oprema",
+    description: "Efikasne zamene za vašu barista opremu",
+    icon: Coffee,
+    to: "/prodavnica"
+  },
+  {
+    id: "rezervni-delovi-kucne",
+    title: "Rezervni delovi za kućne aparate",
+    description: "Trajna podrška za vaše kućne aparate",
+    icon: Package,
+    to: "/prodavnica"
+  }
+];
+
 export function Header() {
   const { count, setOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState<string | null>(null); // 'services' or 'prodavnica'
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
 
   // Prevent body scrolling when mobile menu is open
   useEffect(() => {
@@ -92,15 +116,15 @@ export function Header() {
         <div className="hidden md:flex gap-7 font-display font-medium text-[11px] uppercase tracking-widest text-muted-foreground">
           {NAV.map((n) => (
             <div key={n.to} className="relative">
-              {n.to === "/services" ? (
+              {n.to === "/services" || n.to === "/prodavnica" ? (
                 <button
-                  onMouseEnter={() => setMegaMenuOpen(true)}
-                  onMouseLeave={() => setMegaMenuOpen(false)}
-                  onClick={() => setMegaMenuOpen(!megaMenuOpen)}
+                  onMouseEnter={() => setMegaMenuOpen(n.to)}
+                  onMouseLeave={() => setMegaMenuOpen(null)}
+                  onClick={() => setMegaMenuOpen(megaMenuOpen === n.to ? null : n.to)}
                   className="hover:text-foreground transition-all duration-200 flex items-center gap-1"
                 >
                   {n.label.toUpperCase()}
-                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${megaMenuOpen === n.to ? "rotate-180" : ""}`} />
                 </button>
               ) : (
                 <Link
@@ -143,41 +167,83 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mega Menu - Smaller container (max-w-5xl) */}
+      {/* Mega Menus */}
       <div
-        onMouseEnter={() => setMegaMenuOpen(true)}
-        onMouseLeave={() => setMegaMenuOpen(false)}
-        className={`absolute left-0 right-0 bg-background border-b border-border transition-all duration-300 shadow-lg ${megaMenuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
+        onMouseEnter={() => {}}
+        onMouseLeave={() => setMegaMenuOpen(null)}
+        className="absolute left-0 right-0"
       >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
-            {MEGA_MENU_ITEMS.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.id}
-                  to={item.to}
-                  onClick={() => setMegaMenuOpen(false)}
-                  className="group flex flex-col gap-3 p-4 rounded-xl border border-border bg-background hover:border-primary hover:bg-surface transition-all duration-300 cursor-pointer"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-display font-bold text-sm text-foreground group-hover:text-primary transition-colors duration-200">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1 text-xs font-mono uppercase tracking-widest text-primary mt-1 group-hover:gap-2 transition-all duration-300">
-                    Saznaj više
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                </Link>
-              );
-            })}
+        {/* Prodavnica Mega Menu */}
+        <div
+          className={`absolute left-0 right-0 bg-background border-b border-border transition-all duration-300 shadow-lg ${megaMenuOpen === "/prodavnica" ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {PRODAVNICA_MEGA_MENU_ITEMS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.to}
+                    onClick={() => setMegaMenuOpen(null)}
+                    className="group flex flex-col gap-3 p-4 rounded-xl border border-border bg-background hover:border-primary hover:bg-surface transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-display font-bold text-sm text-foreground group-hover:text-primary transition-colors duration-200">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs font-mono uppercase tracking-widest text-primary mt-1 group-hover:gap-2 transition-all duration-300">
+                      Pogledaj
+                      <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Services Mega Menu */}
+        <div
+          className={`absolute left-0 right-0 bg-background border-b border-border transition-all duration-300 shadow-lg ${megaMenuOpen === "/services" ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+              {MEGA_MENU_ITEMS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.to}
+                    onClick={() => setMegaMenuOpen(null)}
+                    className="group flex flex-col gap-3 p-4 rounded-xl border border-border bg-background hover:border-primary hover:bg-surface transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-display font-bold text-sm text-foreground group-hover:text-primary transition-colors duration-200">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs font-mono uppercase tracking-widest text-primary mt-1 group-hover:gap-2 transition-all duration-300">
+                      Saznaj više
+                      <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -208,25 +274,25 @@ export function Header() {
             <div className="space-y-1">
               {NAV.map((n) => (
                 <div key={n.to}>
-                  {n.to === "/services" ? (
+                  {n.to === "/services" || n.to === "/prodavnica" ? (
                     <div className="border-b border-[#5F6878]">
                       <button
-                        onClick={() => setMobileSubmenuOpen(!mobileSubmenuOpen)}
+                        onClick={() => setMobileSubmenuOpen(mobileSubmenuOpen === n.to ? null : n.to)}
                         className="group flex items-center justify-between w-full py-4 text-white hover:text-[#005BFF] transition-colors duration-200"
                       >
                         <span className="text-xl font-display font-medium uppercase tracking-widest">
                           {n.label}
                         </span>
-                        {mobileSubmenuOpen ? (
+                        {mobileSubmenuOpen === n.to ? (
                           <ChevronUp className="w-5 h-5 text-[#C8CDD7] group-hover:text-[#005BFF]" />
                         ) : (
                           <ChevronDown className="w-5 h-5 text-[#C8CDD7] group-hover:text-[#005BFF]" />
                         )}
                       </button>
-                      {/* Mobile Submenu for Usluge */}
-                      {mobileSubmenuOpen && (
+                      {/* Mobile Submenu */}
+                      {mobileSubmenuOpen === n.to && (
                         <div className="pl-4 pb-4 space-y-2">
-                          {MEGA_MENU_ITEMS.map((item) => {
+                          {(n.to === "/services" ? MEGA_MENU_ITEMS : PRODAVNICA_MEGA_MENU_ITEMS).map((item) => {
                             const Icon = item.icon;
                             return (
                               <Link
@@ -234,7 +300,7 @@ export function Header() {
                                 to={item.to}
                                 onClick={() => {
                                   setMobileMenuOpen(false);
-                                  setMobileSubmenuOpen(false);
+                                  setMobileSubmenuOpen(null);
                                 }}
                                 className="flex items-center gap-3 py-2 text-[#C8CDD7] hover:text-[#005BFF] transition-colors duration-200"
                               >
