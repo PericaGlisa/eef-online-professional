@@ -403,7 +403,7 @@ function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 lg:p-8">
-                    <div className="mb-3 md:mb-4 inline-flex h-12 md:h-14 w-12 md:w-14 items-center justify-center bg-primary/15 backdrop-blur">
+                    <div className="mb-3 md:mb-4 inline-flex h-12 md:h-14 w-12 md:w-14 items-center justify-center bg-primary/20 backdrop-blur-md border border-primary/30">
                       <service.icon
                         className="h-5 md:h-7 w-5 md:w-7 text-primary"
                         aria-hidden="true"

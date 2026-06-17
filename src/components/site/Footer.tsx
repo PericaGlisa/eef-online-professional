@@ -81,8 +81,8 @@ export function Footer() {
 
       {/* Copyright */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-16 sm:mt-24 pt-8 sm:pt-12 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 font-display text-[9px] text-muted-foreground uppercase tracking-widest">
-        <div>© 2026 EEF Online Professional. Sva prava zadržana.</div>
-        <div>
+        <div className="order-2 sm:order-1">© 2026 EEF Online Professional. Sva prava zadržana.</div>
+        <div className="order-1 sm:order-2">
           <a href="mailto:office@eop.rs" className="hover:text-foreground transition-colors">
             office@eop.rs
           </a>
