@@ -353,7 +353,7 @@ function Home() {
             {SERVICE_TILES.slice(0, 1).map((service) => (
               <article
                 key={service.title}
-                className="group relative overflow-hidden border-2 border-primary/40 bg-background hover:border-primary/80 transition-all duration-300"
+                className="group relative overflow-hidden border-2 border-border bg-background hover:border-primary/60 transition-all duration-300"
               >
                 <div className="relative aspect-[4/5] sm:aspect-[16/10]">
                   <img
