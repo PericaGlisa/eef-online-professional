@@ -17,15 +17,40 @@ export const Route = createFileRoute("/prodavnica")({
 });
 
 const CATEGORIES = ["Sve", "Burrovi", "Analizatori", "Mlinske stanice", "Pribor", "Servis"] as const;
+const SORT_OPTIONS = [
+  { value: "default",    label: "Podrazumevano" },
+  { value: "price-asc",  label: "Cena: od najniže" },
+  { value: "price-desc", label: "Cena: od najviše" },
+  { value: "name-asc",   label: "Naziv: A–Z" },
+  { value: "name-desc",  label: "Naziv: Z–A" },
+] as const;
+type SortValue = (typeof SORT_OPTIONS)[number]["value"];
 
 function ShopPage() {
-  const [cat, setCat] = useState<(typeof CATEGORIES)[number]>("Sve");
-  const [q, setQ] = useState("");
+  const [cat, setCat]             = useState<(typeof CATEGORIES)[number]>("Sve");
+  const [q, setQ]                 = useState("");
+  const [sort, setSort]           = useState<SortValue>("default");
+  const [minPrice, setMinPrice]   = useState("");
+  const [maxPrice, setMaxPrice]   = useState("");
+  const [onlyStock, setOnlyStock] = useState(false);
 
   const filtered = useMemo(() => {
-    return CATALOG.filter((p) => (cat === "Sve" || p.category === cat) &&
-      (q === "" || p.name.toLowerCase().includes(q.toLowerCase()) || p.sku.toLowerCase().includes(q.toLowerCase())));
-  }, [cat, q]);
+    let list = CATALOG.filter((p) => {
+      if (cat !== "Sve" && p.category !== cat) return false;
+      if (q && !p.name.toLowerCase().includes(q.toLowerCase()) && !p.sku.toLowerCase().includes(q.toLowerCase())) return false;
+      if (onlyStock && p.stock <= 0) return false;
+      if (minPrice && p.price < Number(minPrice)) return false;
+      if (maxPrice && p.price > Number(maxPrice)) return false;
+      return true;
+    });
+    switch (sort) {
+      case "price-asc":  list = [...list].sort((a, b) => a.price - b.price); break;
+      case "price-desc": list = [...list].sort((a, b) => b.price - a.price); break;
+      case "name-asc":   list = [...list].sort((a, b) => a.name.localeCompare(b.name)); break;
+      case "name-desc":  list = [...list].sort((a, b) => b.name.localeCompare(a.name)); break;
+    }
+    return list;
+  }, [cat, q, sort, minPrice, maxPrice, onlyStock]);
 
   return (
     <PageShell>
@@ -36,7 +61,7 @@ function ShopPage() {
       />
 
       <section className="border-b border-border bg-surface/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-col md:flex-row gap-4 md:items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-col gap-4">
           <div className="flex flex-wrap gap-2">
             {CATEGORIES.map((c) => (
               <button
@@ -52,12 +77,59 @@ function ShopPage() {
               </button>
             ))}
           </div>
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Pretraga po nazivu ili SKU…"
-            className="bg-background border border-border px-3 md:px-4 py-2 font-sans text-sm focus:outline-none focus:border-primary w-full md:w-72"
-          />
+
+          <div className="flex flex-wrap gap-3 items-center">
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Pretraga po nazivu ili SKU…"
+              className="bg-background border border-border px-3 md:px-4 py-2 font-sans text-sm focus:outline-none focus:border-primary w-full md:w-60"
+            />
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortValue)}
+              className="bg-background border border-border px-3 py-2 font-display text-[11px] uppercase tracking-widest focus:outline-none focus:border-primary cursor-pointer"
+            >
+              {SORT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value} className="normal-case tracking-normal text-sm">
+                  {o.label}
+                </option>
+              ))}
+            </select>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                min={0}
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+                placeholder="Min RSD"
+                className="bg-background border border-border px-3 py-2 font-sans text-sm focus:outline-none focus:border-primary w-28"
+              />
+              <span className="text-muted-foreground text-xs">—</span>
+              <input
+                type="number"
+                min={0}
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                placeholder="Max RSD"
+                className="bg-background border border-border px-3 py-2 font-sans text-sm focus:outline-none focus:border-primary w-28"
+              />
+            </div>
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={onlyStock}
+                onChange={(e) => setOnlyStock(e.target.checked)}
+                className="accent-primary w-4 h-4"
+              />
+              <span className="font-display text-[11px] uppercase tracking-widest text-muted-foreground">
+                Samo dostupno
+              </span>
+            </label>
+            <span className="font-mono text-[10px] text-muted-foreground ml-auto">
+              {filtered.length} {filtered.length === 1 ? "proizvod" : "proizvoda"}
+            </span>
+          </div>
         </div>
       </section>
 
@@ -93,20 +165,47 @@ function ShopPage() {
   );
 }
 
+const ALT_IMAGES: Record<string, string | undefined> = (() => {
+  const skus = CATALOG.map((p) => p.sku);
+  const imgs = CATALOG.map((p) => p.image);
+  return Object.fromEntries(skus.map((sku, i) => [sku, imgs[(i + 1) % imgs.length]]));
+})();
+
 function Card({ p }: { p: Product }) {
   const { add, setOpen } = useCart();
+  const [hovered, setHovered] = useState(false);
+  const altImg = ALT_IMAGES[p.sku];
+
   return (
-    <article className="group border border-border bg-background hover:border-primary/60 transition-colors flex flex-col">
+    <article
+      className="group border border-border bg-background hover:border-primary/60 transition-colors flex flex-col"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <Link to={`/proizvod/${p.sku}`} className="relative aspect-[4/3] overflow-hidden bg-surface">
         <img
           src={p.image}
           alt={p.name}
           loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${hovered && altImg ? "opacity-0 scale-105" : "opacity-100 scale-100"}`}
         />
-        <div className="absolute top-2 md:top-3 left-2 md:left-3 font-mono text-[10px] uppercase tracking-widest bg-background/80 backdrop-blur px-2 py-1 text-accent">
+        {altImg && (
+          <img
+            src={altImg}
+            alt=""
+            loading="lazy"
+            aria-hidden
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
+          />
+        )}
+        <div className="absolute top-2 md:top-3 left-2 md:left-3 font-mono text-[10px] uppercase tracking-widest bg-background/80 backdrop-blur px-2 py-1 text-accent z-10">
           {p.category}
         </div>
+        {p.stock === 0 && (
+          <div className="absolute top-2 md:top-3 right-2 md:right-3 font-mono text-[10px] uppercase tracking-widest bg-muted/90 backdrop-blur px-2 py-1 text-muted-foreground z-10">
+            Po narudžbi
+          </div>
+        )}
       </Link>
       <div className="p-4 md:p-5 flex-1 flex flex-col gap-3">
         <Link to={`/proizvod/${p.sku}`} className="flex justify-between items-start gap-3">

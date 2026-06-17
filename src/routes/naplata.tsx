@@ -22,6 +22,27 @@ type Form = {
   name: string; email: string; phone: string; company: string;
   address: string; city: string; country: string; note: string;
 };
+type FieldErrors = Partial<Record<keyof Form, string>>;
+
+// ── Promo codes ──────────────────────────────────────────────────────────────
+const PROMO_CODES: Record<string, { label: string; apply: (total: number) => number }> = {
+  BARISTA10: { label: "–10%",    apply: (t) => Math.round(t * 0.9) },
+  EOP500:    { label: "–500 RSD", apply: (t) => Math.max(0, t - 500) },
+};
+
+// ── Field validators ─────────────────────────────────────────────────────────
+function validate(form: Form): FieldErrors {
+  const e: FieldErrors = {};
+  if (!form.name.trim())                            e.name    = "Unesite ime i prezime.";
+  if (!form.email.trim())                           e.email   = "Unesite email adresu.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email nije validan.";
+  if (!form.phone.trim())                           e.phone   = "Unesite broj telefona.";
+  else if (!/^[+\d\s\-()]{6,}$/.test(form.phone))  e.phone   = "Broj telefona nije validan.";
+  if (!form.address.trim())                         e.address = "Unesite adresu isporuke.";
+  if (!form.city.trim())                            e.city    = "Unesite grad.";
+  if (!form.country.trim())                         e.country = "Unesite državu.";
+  return e;
+}
 
 function CheckoutPage() {
   const { detailed, total, clear } = useCart();
@@ -32,16 +53,52 @@ function CheckoutPage() {
     name: "", email: "", phone: "", company: "",
     address: "", city: "", country: "Srbija", note: "",
   });
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [done, setDone] = useState<{ orderNumber: string } | null>(null);
+  const [touched, setTouched] = useState<Partial<Record<keyof Form, boolean>>>({});
+  const [busy, setBusy]         = useState(false);
+  const [error, setError]       = useState<string | null>(null);
+  const [done, setDone]         = useState<{ orderNumber: string } | null>(null);
+
+  // Promo
+  const [promoInput, setPromoInput]   = useState("");
+  const [promoApplied, setPromoApplied] = useState<string | null>(null);
+  const [promoError, setPromoError]   = useState<string | null>(null);
+
+  const fieldErrors = validate(form);
+  const isValid = Object.keys(fieldErrors).length === 0;
 
   const upd = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((s) => ({ ...s, [k]: e.target.value }));
+  const touch = (k: keyof Form) => () =>
+    setTouched((s) => ({ ...s, [k]: true }));
+
+  // Discount application
+  const discountedTotal = promoApplied && PROMO_CODES[promoApplied]
+    ? PROMO_CODES[promoApplied].apply(total)
+    : total;
+  const discount = total - discountedTotal;
+
+  function applyPromo() {
+    const code = promoInput.trim().toUpperCase();
+    if (PROMO_CODES[code]) {
+      setPromoApplied(code);
+      setPromoError(null);
+    } else {
+      setPromoError("Kod nije validan ili je istekao.");
+      setPromoApplied(null);
+    }
+  }
+  function removePromo() {
+    setPromoApplied(null);
+    setPromoInput("");
+    setPromoError(null);
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    // Mark all touched to show errors
+    setTouched(Object.fromEntries(Object.keys(form).map((k) => [k, true])));
+    if (!isValid) { setError("Popunite sva obavezna polja ispravno."); return; }
     if (detailed.length === 0) { setError("Vaša korpa je prazna."); return; }
     setBusy(true);
     try {
@@ -49,7 +106,8 @@ function CheckoutPage() {
         data: {
           customer: form,
           items: detailed.map((d) => ({ sku: d.sku, name: d.product.name, qty: d.qty, price: d.product.price })),
-          total,
+          total: discountedTotal,
+          promoCode: promoApplied ?? undefined,
         },
       });
       if (!res.ok) { setError(res.error || "Slanje nije uspelo."); return; }
@@ -94,19 +152,59 @@ function CheckoutPage() {
 
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <form onSubmit={onSubmit} className="lg:col-span-2 space-y-8">
+          <form onSubmit={onSubmit} noValidate className="lg:col-span-2 space-y-8">
             <Fieldset legend="Kontakt">
-              <Field label="Ime i prezime *"><input required maxLength={120} value={form.name} onChange={upd("name")} className={inp} /></Field>
-              <Field label="Email *"><input required type="email" maxLength={200} value={form.email} onChange={upd("email")} className={inp} /></Field>
-              <Field label="Telefon *"><input required maxLength={40} value={form.phone} onChange={upd("phone")} className={inp} /></Field>
-              <Field label="Organizacija"><input maxLength={200} value={form.company} onChange={upd("company")} className={inp} /></Field>
+              <Field label="Ime i prezime *" error={touched.name ? fieldErrors.name : undefined}>
+                <input
+                  required maxLength={120} value={form.name}
+                  onChange={upd("name")} onBlur={touch("name")}
+                  className={inpCls(!!touched.name && !!fieldErrors.name)}
+                />
+              </Field>
+              <Field label="Email *" error={touched.email ? fieldErrors.email : undefined}>
+                <input
+                  required type="email" maxLength={200} value={form.email}
+                  onChange={upd("email")} onBlur={touch("email")}
+                  className={inpCls(!!touched.email && !!fieldErrors.email)}
+                />
+              </Field>
+              <Field label="Telefon *" error={touched.phone ? fieldErrors.phone : undefined}>
+                <input
+                  required maxLength={40} value={form.phone}
+                  onChange={upd("phone")} onBlur={touch("phone")}
+                  className={inpCls(!!touched.phone && !!fieldErrors.phone)}
+                />
+              </Field>
+              <Field label="Organizacija">
+                <input maxLength={200} value={form.company} onChange={upd("company")} className={inpCls(false)} />
+              </Field>
             </Fieldset>
 
             <Fieldset legend="Adresa isporuke">
-              <Field label="Adresa *" full><input required maxLength={400} value={form.address} onChange={upd("address")} className={inp} /></Field>
-              <Field label="Grad *"><input required maxLength={120} value={form.city} onChange={upd("city")} className={inp} /></Field>
-              <Field label="Država *"><input required maxLength={80} value={form.country} onChange={upd("country")} className={inp} /></Field>
-              <Field label="Napomena" full><textarea rows={3} maxLength={2000} value={form.note} onChange={upd("note")} className={`${inp} resize-none`} /></Field>
+              <Field label="Adresa *" full error={touched.address ? fieldErrors.address : undefined}>
+                <input
+                  required maxLength={400} value={form.address}
+                  onChange={upd("address")} onBlur={touch("address")}
+                  className={inpCls(!!touched.address && !!fieldErrors.address)}
+                />
+              </Field>
+              <Field label="Grad *" error={touched.city ? fieldErrors.city : undefined}>
+                <input
+                  required maxLength={120} value={form.city}
+                  onChange={upd("city")} onBlur={touch("city")}
+                  className={inpCls(!!touched.city && !!fieldErrors.city)}
+                />
+              </Field>
+              <Field label="Država *" error={touched.country ? fieldErrors.country : undefined}>
+                <input
+                  required maxLength={80} value={form.country}
+                  onChange={upd("country")} onBlur={touch("country")}
+                  className={inpCls(!!touched.country && !!fieldErrors.country)}
+                />
+              </Field>
+              <Field label="Napomena" full>
+                <textarea rows={3} maxLength={2000} value={form.note} onChange={upd("note")} className={`${inpCls(false)} resize-none`} />
+              </Field>
             </Fieldset>
 
             {error && (
@@ -118,7 +216,7 @@ function CheckoutPage() {
               disabled={busy || detailed.length === 0}
               className="w-full bg-primary text-primary-foreground font-display font-bold uppercase tracking-widest text-sm py-5 hover:bg-accent hover:text-accent-foreground transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {busy ? "Slanje porudžbine…" : `Potvrdi porudžbinu — ${fmtRSD(total)}`}
+              {busy ? "Slanje porudžbine…" : `Potvrdi porudžbinu — ${fmtRSD(discountedTotal)}`}
             </button>
             <p className="text-[11px] text-muted-foreground">
               Slanjem porudžbine prihvatate da vas kontaktiramo radi potvrde. Bez online naplate.
@@ -143,9 +241,58 @@ function CheckoutPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="border-t border-border pt-4 flex justify-between items-baseline">
-                  <span className="font-display uppercase text-xs tracking-widest text-muted-foreground">Ukupno</span>
-                  <span className="font-display font-black text-2xl">{fmtRSD(total)}</span>
+
+                {/* Promo code */}
+                <div className="border-t border-border pt-4 space-y-3">
+                  <div className="font-display uppercase tracking-widest text-[10px] text-muted-foreground">Promo kod</div>
+                  {promoApplied ? (
+                    <div className="flex items-center justify-between bg-primary/10 border border-primary/30 px-3 py-2">
+                      <span className="font-mono text-xs text-primary font-bold">{promoApplied} — {PROMO_CODES[promoApplied].label}</span>
+                      <button
+                        type="button"
+                        onClick={removePromo}
+                        className="font-mono text-[10px] uppercase text-muted-foreground hover:text-destructive transition-colors ml-2"
+                      >
+                        Ukloni
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input
+                        value={promoInput}
+                        onChange={(e) => setPromoInput(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), applyPromo())}
+                        placeholder="Unesite kod…"
+                        className="flex-1 bg-background border border-border px-3 py-2 font-mono text-xs focus:outline-none focus:border-primary uppercase"
+                      />
+                      <button
+                        type="button"
+                        onClick={applyPromo}
+                        className="border border-border px-3 py-2 font-display text-[10px] uppercase tracking-widest hover:border-primary hover:text-primary transition-colors whitespace-nowrap"
+                      >
+                        Primeni
+                      </button>
+                    </div>
+                  )}
+                  {promoError && <p className="text-destructive text-[11px]">{promoError}</p>}
+                </div>
+
+                {/* Totals */}
+                <div className="border-t border-border pt-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground font-display uppercase text-[10px] tracking-widest">Međuzbir</span>
+                    <span className="font-display font-bold">{fmtRSD(total)}</span>
+                  </div>
+                  {discount > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-primary font-display uppercase text-[10px] tracking-widest">Popust</span>
+                      <span className="font-display font-bold text-primary">–{fmtRSD(discount)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between items-baseline border-t border-border pt-2">
+                    <span className="font-display uppercase text-xs tracking-widest text-muted-foreground">Ukupno</span>
+                    <span className="font-display font-black text-2xl">{fmtRSD(discountedTotal)}</span>
+                  </div>
                 </div>
               </>
             )}
@@ -156,8 +303,8 @@ function CheckoutPage() {
   );
 }
 
-const inp =
-  "w-full bg-background border border-border px-4 py-3 font-sans text-sm focus:outline-none focus:border-primary transition-colors";
+const inpCls = (hasError: boolean) =>
+  `w-full bg-background border ${hasError ? "border-destructive" : "border-border"} px-4 py-3 font-sans text-sm focus:outline-none focus:border-primary transition-colors`;
 
 function Fieldset({ legend, children }: { legend: string; children: React.ReactNode }) {
   return (
@@ -168,11 +315,12 @@ function Fieldset({ legend, children }: { legend: string; children: React.ReactN
   );
 }
 
-function Field({ label, children, full }: { label: string; children: React.ReactNode; full?: boolean }) {
+function Field({ label, children, full, error }: { label: string; children: React.ReactNode; full?: boolean; error?: string }) {
   return (
     <label className={`block ${full ? "sm:col-span-2" : ""}`}>
       <span className="font-display uppercase tracking-widest text-[10px] text-muted-foreground block mb-2">{label}</span>
       {children}
+      {error && <span className="text-destructive text-[11px] mt-1 block">{error}</span>}
     </label>
   );
 }
