@@ -107,12 +107,18 @@ function Contact() {
           {/* Side */}
           <div className="lg:col-span-5 space-y-12">
             <Block label="KONTAKT">
-              <a href="mailto:office@eop.rs" className="hover:text-primary">office@eop.rs</a>
+              <a href="mailto:office@eop.rs" className="hover:text-primary">
+                office@eop.rs
+              </a>
               <br />
-              <a href="tel:+381648222651" className="hover:text-primary">064 8222 651</a>
+              <a href="tel:+381648222651" className="hover:text-primary">
+                064 8222 651
+              </a>
             </Block>
             <Block label="VEB">
-              <a href="https://eop.rs" className="hover:text-primary">eop.rs</a>
+              <a href="https://eop.rs" className="hover:text-primary">
+                eop.rs
+              </a>
             </Block>
             <Block label="RADNO VREME">
               Pon–Pet // 07:30 — 15:30

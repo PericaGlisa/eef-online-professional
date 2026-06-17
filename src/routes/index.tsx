@@ -15,6 +15,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
+import { useReveal } from "@/hooks/useReveal";
+
 import aparatiZaKafu from "@/assets/aparati-za-kafu-i-vending-oprema.webp";
 import rezervniDelovi from "@/assets/rezervni-delovi-za-kucne-aparate.webp";
 import ugostiteljskaOprema from "@/assets/ugostiteljska-oprema.webp";
@@ -122,24 +124,6 @@ const SERVICE_TILES = [
   },
 ] as const;
 
-const TRUST_POINTS = [
-  {
-    icon: Gauge,
-    label: "Brza identifikacija delova",
-    value: "Precizna selekcija po uređaju",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Pouzdana zamena",
-    value: "Delovi za dugotrajan rad",
-  },
-  {
-    icon: Coffee,
-    label: "Barista fokus",
-    value: "Oprema za kafu i vending sisteme",
-  },
-] as const;
-
 const GALLERY_IMAGES = [
   { src: g1 },
   { src: g2 },
@@ -155,6 +139,7 @@ const GALLERY_IMAGES = [
 const SLIDE_INTERVAL = 7000;
 
 function Home() {
+  useReveal();
   const [active, setActive] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const activeOffer = OFFERS[active];
@@ -192,11 +177,7 @@ function Home() {
               index === active ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
-            <img
-              src={offer.image}
-              alt=""
-              className="h-full w-full object-cover"
-            />
+            <img src={offer.image} alt="" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
           </div>
@@ -300,7 +281,7 @@ function Home() {
       </section>
 
       {/* Category Cards - Perfectly Identical */}
-      <section className="border-b border-border bg-surface py-16 md:py-24">
+      <section className="border-b border-border bg-surface py-16 md:py-24 reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-12 md:mb-16 grid gap-6 border-b border-border pb-8 md:pb-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
@@ -312,8 +293,8 @@ function Home() {
               </h2>
             </div>
             <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-              Fokus je na opremi koja svakodnevno radi pod opterećenjem: ugostiteljstvo,
-              aparati za kafu, vending sistemi i kućni uređaji kojima treba pouzdana zamena delova.
+              Fokus je na opremi koja svakodnevno radi pod opterećenjem: ugostiteljstvo, aparati za
+              kafu, vending sistemi i kućni uređaji kojima treba pouzdana zamena delova.
             </p>
           </div>
 
@@ -331,7 +312,10 @@ function Home() {
                     className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <offer.Icon className="absolute bottom-4 md:bottom-6 left-4 md:left-6 h-7 md:h-9 w-7 md:w-9 text-accent" aria-hidden />
+                  <offer.Icon
+                    className="absolute bottom-4 md:bottom-6 left-4 md:left-6 h-7 md:h-9 w-7 md:w-9 text-accent"
+                    aria-hidden
+                  />
                 </div>
                 <div className="flex flex-col justify-between p-5 md:p-7 min-h-[180px] md:min-h-[220px]">
                   <div className="space-y-3">
@@ -353,7 +337,7 @@ function Home() {
       </section>
 
       {/* Premium 2-Column Services Grid with All Buttons */}
-      <section className="border-b border-border bg-background py-16 md:py-24">
+      <section className="border-b border-border bg-background py-16 md:py-24 reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-8 md:mb-12">
             <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
@@ -371,7 +355,7 @@ function Home() {
                 key={service.title}
                 className="group relative overflow-hidden border-2 border-primary/40 bg-background md:col-span-2 hover:border-primary/80 transition-all duration-300"
               >
-                <div className="relative aspect-[16/9]">
+                <div className="relative aspect-[4/5] sm:aspect-[16/10] md:aspect-[16/9]">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -381,7 +365,10 @@ function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10 lg:p-12">
                     <div className="mb-4 md:mb-6 inline-flex h-16 md:h-20 w-16 md:w-20 items-center justify-center bg-primary/20 backdrop-blur-md border border-primary/30">
-                      <service.icon className="h-7 md:h-10 w-7 md:w-10 text-primary" aria-hidden="true" />
+                      <service.icon
+                        className="h-7 md:h-10 w-7 md:w-10 text-primary"
+                        aria-hidden="true"
+                      />
                     </div>
                     <h3 className="mb-3 md:mb-4 text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-card-foreground">
                       {service.title}
@@ -407,7 +394,7 @@ function Home() {
                 key={service.title}
                 className="group relative overflow-hidden border-2 border-border bg-background hover:border-primary/60 transition-all duration-300"
               >
-                <div className="relative aspect-[16/10]">
+                <div className="relative aspect-[4/5] sm:aspect-[16/10]">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -417,7 +404,10 @@ function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 lg:p-8">
                     <div className="mb-3 md:mb-4 inline-flex h-12 md:h-14 w-12 md:w-14 items-center justify-center bg-primary/15 backdrop-blur">
-                      <service.icon className="h-5 md:h-7 w-5 md:w-7 text-primary" aria-hidden="true" />
+                      <service.icon
+                        className="h-5 md:h-7 w-5 md:w-7 text-primary"
+                        aria-hidden="true"
+                      />
                     </div>
                     <h3 className="mb-2 text-xl md:text-2xl font-black tracking-tight text-card-foreground">
                       {service.title}
@@ -441,7 +431,7 @@ function Home() {
       </section>
 
       {/* Compact Premium Gallery */}
-      <section className="border-b border-border bg-surface/40 py-16">
+      <section className="border-b border-border bg-surface/40 py-16 reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-8 flex items-end justify-between border-b border-border pb-6">
             <div>
@@ -478,30 +468,40 @@ function Home() {
         </div>
       </section>
 
-      {/* Trust Points */}
-      <section className="border-b border-border bg-background py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-px border border-border bg-border md:grid-cols-3">
-            {TRUST_POINTS.map((point) => (
-              <div
-                key={point.label}
-                className="group bg-background p-8 transition-all hover:bg-primary/5"
-              >
-                <div className="mb-6 flex h-14 w-14 items-center justify-center bg-primary/10 transition-all group-hover:bg-primary/20">
-                  <point.icon className="h-7 w-7 text-primary" aria-hidden="true" />
-                </div>
-                <h3 className="mb-2 font-display text-lg font-bold text-card-foreground">
-                  {point.label}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{point.value}</p>
-              </div>
-            ))}
+      {/* Brand Ticker */}
+      <section className="py-16 border-b border-border bg-surface/10 overflow-hidden reveal-on-scroll">
+        <div className="max-w-7xl mx-auto px-6 mb-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent text-center">
+            [ Podržani brendovi i sistemi ]
+          </div>
+        </div>
+        <div className="relative flex overflow-x-hidden border-y border-border/30 bg-background/50 py-6">
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(4)]
+              .flatMap(() => [
+                "Mazzer",
+                "Anfim",
+                "Victoria Arduino",
+                "La Marzocco",
+                "Mahlkönig",
+                "Sanremo",
+                "BWT",
+                "Brita",
+              ])
+              .map((brand, idx) => (
+                <span
+                  key={idx}
+                  className="mx-8 font-display text-2xl md:text-3xl font-bold tracking-widest text-muted-foreground/30 hover:text-primary transition-all duration-300 cursor-default uppercase"
+                >
+                  {brand} <span className="text-primary/30 ml-8 font-sans text-lg">•</span>
+                </span>
+              ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section - Premium */}
-      <section className="bg-background py-24">
+      <section className="bg-background py-28 reveal-on-scroll">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <h2 className="font-display mb-6 text-4xl font-bold tracking-tight text-card-foreground md:text-5xl">
             Spremni za saradnju.
@@ -511,7 +511,7 @@ function Home() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center gap-2 bg-primary px-10 py-6 font-display text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all hover:bg-accent hover:text-accent-foreground"
+            className="inline-flex items-center justify-center gap-2 bg-primary px-10 py-6 font-display text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all duration-300 hover:bg-accent hover:text-accent-foreground"
           >
             Kontaktirajte nas
             <ArrowRight className="h-4 w-4" />

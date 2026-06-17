@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
-import { 
-  Menu, 
-  X, 
-  ShoppingCart, 
+import {
+  Menu,
+  X,
+  ShoppingCart,
   ArrowRight,
   Package,
   Coffee,
@@ -12,7 +12,7 @@ import {
   Beaker,
   Droplets,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
 } from "lucide-react";
 
 const NAV = [
@@ -21,6 +21,7 @@ const NAV = [
   { to: "/services", label: "Usluge" },
   { to: "/o-nama", label: "O nama" },
   { to: "/blog", label: "Blog" },
+  { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Kontakt" },
 ] as const;
 
@@ -30,36 +31,36 @@ const MEGA_MENU_ITEMS = [
     title: "Rezervni delovi",
     description: "Originalni i zamenski delovi za sve vrste aparata",
     icon: Package,
-    to: "/services"
+    to: "/services",
   },
   {
     id: "barista-oprema",
     title: "Barista oprema",
     description: "Profesionalna oprema za bariste i kafiće",
     icon: Coffee,
-    to: "/services"
+    to: "/services",
   },
   {
     id: "aparati",
     title: "Aparati",
     description: "Kompletna ponuda aparata za kafu i ugostiteljstvo",
     icon: Wrench,
-    to: "/services"
+    to: "/services",
   },
   {
     id: "hemija",
     title: "Hemija",
     description: "Profesionalni preparati za čišćenje i održavanje",
     icon: Beaker,
-    to: "/services"
+    to: "/services",
   },
   {
     id: "omeksivaci-vode",
     title: "Omekšivači vode",
     description: "Sistemi za filtriranje i omekšavanje vode",
     icon: Droplets,
-    to: "/services"
-  }
+    to: "/services",
+  },
 ];
 
 const PRODAVNICA_MEGA_MENU_ITEMS = [
@@ -68,22 +69,22 @@ const PRODAVNICA_MEGA_MENU_ITEMS = [
     title: "Ugostiteljska oprema",
     description: "Kvalitetni rezervni delovi za opremu u ugostiteljstvu",
     icon: Wrench,
-    to: "/prodavnica"
+    to: "/prodavnica",
   },
   {
     id: "aparati-za-kafu",
     title: "Aparati za kafu i vending oprema",
     description: "Efikasne zamene za vašu barista opremu",
     icon: Coffee,
-    to: "/prodavnica"
+    to: "/prodavnica",
   },
   {
     id: "rezervni-delovi-kucne",
     title: "Rezervni delovi za kućne aparate",
     description: "Trajna podrška za vaše kućne aparate",
     icon: Package,
-    to: "/prodavnica"
-  }
+    to: "/prodavnica",
+  },
 ];
 
 export function Header() {
@@ -128,17 +129,30 @@ export function Header() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+    <>
+      <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link to="/" className="font-display font-bold tracking-tight text-base sm:text-lg uppercase">
+        <Link
+          to="/"
+          className="font-display font-bold tracking-tight text-base sm:text-lg uppercase"
+        >
           EEF <span className="text-primary">Online</span> Professional
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-7 font-display font-medium text-[11px] uppercase tracking-widest text-muted-foreground">
           {NAV.map((n) => (
-            <div key={n.to} className="relative" onMouseEnter={n.to === "/services" || n.to === "/prodavnica" ? () => handleMouseEnter(n.to) : undefined} onMouseLeave={handleMouseLeave}>
+            <div
+              key={n.to}
+              className="relative"
+              onMouseEnter={
+                n.to === "/services" || n.to === "/prodavnica"
+                  ? () => handleMouseEnter(n.to)
+                  : undefined
+              }
+              onMouseLeave={handleMouseLeave}
+            >
               {n.to === "/services" || n.to === "/prodavnica" ? (
                 <Link
                   to={n.to}
@@ -146,7 +160,9 @@ export function Header() {
                   activeProps={{ className: "text-foreground" }}
                 >
                   {n.label.toUpperCase()}
-                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${megaMenuOpen === n.to ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    className={`w-3 h-3 transition-transform duration-200 ${megaMenuOpen === n.to ? "rotate-180" : ""}`}
+                  />
                 </Link>
               ) : (
                 <Link
@@ -173,7 +189,9 @@ export function Header() {
             <span className="hidden md:inline font-display font-semibold text-[11px] uppercase tracking-widest">
               Korpa
             </span>
-            <span className={`inline-flex items-center justify-center min-w-[18px] h-[18px] rounded-full text-[10px] font-bold text-white ${count > 0 ? "bg-primary" : "bg-surface text-muted-foreground"}`}>
+            <span
+              className={`inline-flex items-center justify-center min-w-[18px] h-[18px] rounded-full text-[10px] font-bold text-white ${count > 0 ? "bg-primary" : "bg-surface text-muted-foreground"}`}
+            >
               {count}
             </span>
           </button>
@@ -273,52 +291,67 @@ export function Header() {
           </div>
         </div>
       </div>
+    </nav>
 
-      {/* Mobile Menu - BRAND NAVY BLUE (#0A1630) SOLID BACKGROUND! */}
+      {/* Mobile Menu - BRAND COFFEE THEMED SOLID BACKGROUND! */}
+      {/* MOVED OUTSIDE NAV TO ESCAPE BACKDROP-FILTER CONTAINING BLOCK */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[999999] bg-[#0A1630]">
+        <div className="fixed inset-0 z-[999999] bg-background flex flex-col">
           {/* Header */}
-          <div className="flex justify-between items-center p-4 sm:p-6 border-b border-[#5F6878] bg-[#0A1630]">
+          <div className="flex justify-between items-center p-4 sm:p-6 border-b border-border bg-background">
             <Link
               to="/"
-              className="font-display font-bold tracking-tight text-lg sm:text-xl uppercase text-white"
+              className="font-display font-bold tracking-tight text-lg sm:text-xl uppercase text-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
-              EEF <span className="text-[#005BFF]">Online</span> Professional
+              EEF <span className="text-primary">Online</span> Professional
             </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 border border-[#5F6878] rounded-md hover:border-[#005BFF] hover:bg-[#005BFF]/10 transition-all duration-200"
+              className="p-2 border border-border rounded-md hover:border-primary hover:bg-primary/10 transition-all duration-200"
               aria-label="Zatvori meni"
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-6 h-6 text-foreground" />
             </button>
           </div>
 
           {/* Navigation Links */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#0A1630]">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-background">
             <div className="space-y-1">
               {NAV.map((n) => (
                 <div key={n.to}>
                   {n.to === "/services" || n.to === "/prodavnica" ? (
-                    <div className="border-b border-[#5F6878]">
-                      <button
-                        onClick={() => setMobileSubmenuOpen(mobileSubmenuOpen === n.to ? null : n.to)}
-                        className="group flex items-center justify-between w-full py-4 text-white hover:text-[#005BFF] transition-colors duration-200"
-                      >
-                        <span className="text-xl font-display font-medium uppercase tracking-widest">
+                    <div className="border-b border-border">
+                      <div className="flex items-center justify-between py-2">
+                        <Link
+                          to={n.to}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="py-2 text-xl font-display font-medium uppercase tracking-widest text-foreground hover:text-primary transition-colors duration-200"
+                          activeProps={{ className: "text-primary pl-2" }}
+                        >
                           {n.label}
-                        </span>
-                        {mobileSubmenuOpen === n.to ? (
-                          <ChevronUp className="w-5 h-5 text-[#C8CDD7] group-hover:text-[#005BFF]" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 text-[#C8CDD7] group-hover:text-[#005BFF]" />
-                        )}
-                      </button>
+                        </Link>
+                        <button
+                          onClick={() =>
+                            setMobileSubmenuOpen(mobileSubmenuOpen === n.to ? null : n.to)
+                          }
+                          className="p-3 hover:bg-surface rounded transition-colors"
+                          aria-label={`Prikaži podmeni za ${n.label}`}
+                        >
+                          {mobileSubmenuOpen === n.to ? (
+                            <ChevronUp className="w-5 h-5 text-muted-foreground hover:text-primary" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-muted-foreground hover:text-primary" />
+                          )}
+                        </button>
+                      </div>
                       {/* Mobile Submenu */}
                       {mobileSubmenuOpen === n.to && (
                         <div className="pl-4 pb-4 space-y-2">
-                          {(n.to === "/services" ? MEGA_MENU_ITEMS : PRODAVNICA_MEGA_MENU_ITEMS).map((item) => {
+                          {(n.to === "/services"
+                            ? MEGA_MENU_ITEMS
+                            : PRODAVNICA_MEGA_MENU_ITEMS
+                          ).map((item) => {
                             const Icon = item.icon;
                             return (
                               <Link
@@ -328,9 +361,9 @@ export function Header() {
                                   setMobileMenuOpen(false);
                                   setMobileSubmenuOpen(null);
                                 }}
-                                className="flex items-center gap-3 py-2 text-[#C8CDD7] hover:text-[#005BFF] transition-colors duration-200"
+                                className="flex items-center gap-3 py-3 text-muted-foreground hover:text-primary transition-colors duration-200"
                               >
-                                <Icon className="w-5 h-5" />
+                                <Icon className="w-5 h-5 text-primary" />
                                 <span className="text-sm font-display uppercase tracking-widest">
                                   {item.title}
                                 </span>
@@ -345,13 +378,13 @@ export function Header() {
                       key={n.to}
                       to={n.to}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="group flex items-center justify-between py-4 border-b border-[#5F6878] hover:pl-2 transition-all duration-200 text-white"
-                      activeProps={{ className: "text-[#005BFF] border-[#005BFF] pl-2" }}
+                      className="group flex items-center justify-between py-4 border-b border-border hover:pl-2 transition-all duration-200 text-foreground"
+                      activeProps={{ className: "text-primary border-primary pl-2" }}
                     >
-                      <span className="text-xl font-display font-medium uppercase tracking-widest">
+                      <span className="text-xl font-display font-medium uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">
                         {n.label}
                       </span>
-                      <ArrowRight className="w-5 h-5 text-[#C8CDD7] group-hover:text-[#005BFF] transition-all duration-200" />
+                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all duration-200" />
                     </Link>
                   )}
                 </div>
@@ -360,26 +393,26 @@ export function Header() {
           </div>
 
           {/* Footer Contact Info */}
-          <div className="p-4 sm:p-6 border-t border-[#5F6878] bg-[#0A1630]">
+          <div className="p-4 sm:p-6 border-t border-border bg-background">
             <div className="space-y-3">
               <a
                 href="tel:+381648222651"
-                className="flex items-center gap-2 text-sm text-[#C8CDD7] font-display tracking-widest uppercase text-[10px] hover:text-white transition-colors"
+                className="flex items-center gap-2 text-muted-foreground font-display tracking-widest uppercase text-[10px] hover:text-foreground transition-colors"
               >
-                <span className="w-2 h-2 rounded-full bg-[#005BFF]"></span>
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
                 064 8222 651
               </a>
               <a
                 href="mailto:office@eop.rs"
-                className="flex items-center gap-2 text-sm text-[#C8CDD7] font-display tracking-widest uppercase text-[10px] hover:text-white transition-colors"
+                className="flex items-center gap-2 text-muted-foreground font-display tracking-widest uppercase text-[10px] hover:text-foreground transition-colors"
               >
-                <span className="w-2 h-2 rounded-full bg-[#005BFF]"></span>
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
                 office@eop.rs
               </a>
             </div>
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }

@@ -42,7 +42,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) setItems(JSON.parse(raw));
-    } catch {}
+    } catch (e) {
+      console.warn("Failed to load cart", e);
+    }
   }, []);
 
   useEffect(() => {
@@ -72,7 +74,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       remove: (sku) => setItems((prev) => prev.filter((p) => p.sku !== sku)),
       setQty: (sku, qty) =>
         setItems((prev) =>
-          qty <= 0 ? prev.filter((p) => p.sku !== sku) : prev.map((p) => (p.sku === sku ? { ...p, qty } : p)),
+          qty <= 0
+            ? prev.filter((p) => p.sku !== sku)
+            : prev.map((p) => (p.sku === sku ? { ...p, qty } : p)),
         ),
       clear: () => setItems([]),
       count: detailed.reduce((s, d) => s + d.qty, 0),

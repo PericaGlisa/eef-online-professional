@@ -51,13 +51,13 @@ function ONama() {
           <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
             <p>
               Pružamo kompletna rešenja za ugostiteljske objekte, kafiće i domaćinstva već godinama.
-              Naša misija je da vam omogućimo pristup kvalitetnim rezervnim delovima, profesionalnoj opremi
-              i stručnoj podršci, kako bi vaši uređaji radili nesmetano iz dana u dan.
+              Naša misija je da vam omogućimo pristup kvalitetnim rezervnim delovima, profesionalnoj
+              opremi i stručnoj podršci, kako bi vaši uređaji radili nesmetano iz dana u dan.
             </p>
             <p>
-              Verujemo u dugoročna partnerstva, individualni pristup i transparentnost u svakom koraku.
-              Bez obzira da li vam treba jedan mali deo ili kompletno rešenje za vaš objekat,
-              naš tim je tu da vam pomogne.
+              Verujemo u dugoročna partnerstva, individualni pristup i transparentnost u svakom
+              koraku. Bez obzira da li vam treba jedan mali deo ili kompletno rešenje za vaš
+              objekat, naš tim je tu da vam pomogne.
             </p>
           </div>
         </div>
@@ -67,9 +67,7 @@ function ONama() {
       <section className="py-24 bg-surface border-b border-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="font-mono text-primary text-xs mb-4 tracking-widest">
-              [ NAŠ TIM ]
-            </div>
+            <div className="font-mono text-primary text-xs mb-4 tracking-widest">[ NAŠ TIM ]</div>
             <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6">
               Ljudi koji stoje iza kvaliteta.
             </h2>
@@ -149,8 +147,8 @@ function ONama() {
             Upoznajte se sa nama i započnite saradnju.
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Budite slobodni da nas kontaktirate za bilo kakvo pitanje ili ponudu.
-            Naš tim je tu za vas.
+            Budite slobodni da nas kontaktirate za bilo kakvo pitanje ili ponudu. Naš tim je tu za
+            vas.
           </p>
           <Link
             to="/contact"

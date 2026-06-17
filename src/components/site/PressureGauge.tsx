@@ -137,16 +137,26 @@ export function PressureGauge() {
       <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
         {/* SVG Pressure Gauge Dial */}
         <div className="relative flex justify-center">
-          <svg className="h-48 w-48 drop-shadow-[0_0_15px_rgba(0,91,255,0.15)]" viewBox="0 0 200 200">
+          <svg
+            className="h-48 w-48 drop-shadow-[0_0_15px_rgba(0,91,255,0.15)]"
+            viewBox="0 0 200 200"
+          >
             {/* Outer metallic ring */}
-            <circle cx="100" cy="100" r="92" fill="none" stroke="var(--color-border)" strokeWidth="4" />
+            <circle
+              cx="100"
+              cy="100"
+              r="92"
+              fill="none"
+              stroke="var(--color-border)"
+              strokeWidth="4"
+            />
             <circle cx="100" cy="100" r="88" fill="var(--color-background)" />
 
             {/* Optimal zone arc (8 to 10 bar) */}
             {/* 8 bar = -120 + (8/12)*240 = 40deg, 10 bar = -120 + (10/12)*240 = 80deg */}
             {/* Using SVG arc path for 40 to 80 degrees */}
             <path
-              d="M 154.6 154.6 A 78 78 0 0 1 178 100" 
+              d="M 154.6 154.6 A 78 78 0 0 1 178 100"
               fill="none"
               stroke="var(--color-primary)"
               strokeWidth="6"
@@ -155,7 +165,7 @@ export function PressureGauge() {
             />
             {/* A glowing highlight zone */}
             <path
-              d="M 154.6 154.6 A 78 78 0 0 1 178 100" 
+              d="M 154.6 154.6 A 78 78 0 0 1 178 100"
               fill="none"
               stroke="var(--color-accent)"
               strokeWidth="2"
@@ -166,7 +176,7 @@ export function PressureGauge() {
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((val) => {
               const angle = -120 + (val / 12) * 240;
               const angleRad = (angle * Math.PI) / 180;
-              
+
               // Tick marks
               const x1 = 100 + 78 * Math.cos(angleRad);
               const y1 = 100 + 78 * Math.sin(angleRad);
@@ -193,7 +203,9 @@ export function PressureGauge() {
                     <text
                       x={tx}
                       y={ty}
-                      fill={isOptimal ? "var(--color-card-foreground)" : "var(--color-muted-foreground)"}
+                      fill={
+                        isOptimal ? "var(--color-card-foreground)" : "var(--color-muted-foreground)"
+                      }
                       fontSize="9"
                       fontWeight={isOptimal ? "bold" : "normal"}
                       fontFamily="var(--font-sans)"
@@ -237,7 +249,9 @@ export function PressureGauge() {
               style={{
                 transform: `rotate(${needleRotation}deg)`,
                 transformOrigin: "100px 100px",
-                transition: isExtracting ? "transform 0.1s linear" : "transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                transition: isExtracting
+                  ? "transform 0.1s linear"
+                  : "transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
               }}
             >
               <line
@@ -334,8 +348,8 @@ export function PressureGauge() {
 
       {/* Profile info label */}
       <p className="mt-4 text-center text-xs leading-relaxed text-muted-foreground max-w-sm">
-        Ovaj profil simulira pred-infuziju na 2 bar pritiska za ravnomerno natapanje kafe, 
-        nakon čega pritisak raste na optimalnih 9 bar, dajući savršen espresso šot od 36g.
+        Ovaj profil simulira pred-infuziju na 2 bar pritiska za ravnomerno natapanje kafe, nakon
+        čega pritisak raste na optimalnih 9 bar, dajući savršen espresso šot od 36g.
       </p>
     </div>
   );

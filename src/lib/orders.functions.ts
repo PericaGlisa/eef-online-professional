@@ -34,7 +34,11 @@ const ORDER_TO = "office@eop.rs";
 const ORDER_FROM = "EEF Online Professional <onboarding@resend.dev>";
 
 const fmt = (n: number) =>
-  new Intl.NumberFormat("sr-Latn-RS", { style: "currency", currency: "RSD", maximumFractionDigits: 0 }).format(n);
+  new Intl.NumberFormat("sr-Latn-RS", {
+    style: "currency",
+    currency: "RSD",
+    maximumFractionDigits: 0,
+  }).format(n);
 
 function buildHtml(data: OrderInput, orderNumber: string) {
   const rows = data.items

@@ -1,10 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="eef-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#007AFF"/>
-      <stop offset="100%" stop-color="#005BFF"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#1a1108"/>
+      <stop offset="100%" stop-color="#0e0b05"/>
+    </linearGradient>
+    <linearGradient id="copper" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#e8c07a"/>
+      <stop offset="60%"  stop-color="#c8883a"/>
+      <stop offset="100%" stop-color="#a06828"/>
+    </linearGradient>
+    <!-- thin ring -->
+    <linearGradient id="ring" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#e8c07a" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#a06828" stop-opacity="0.3"/>
     </linearGradient>
   </defs>
-  <circle cx="50" cy="50" r="50" fill="url(#eef-gradient)"/>
-  <text x="50" y="63" text-anchor="middle" fill="white" font-family="Exo 2, Inter, Arial, sans-serif" font-size="34" font-weight="800">EOP</text>
+
+  <!-- Background -->
+  <circle cx="50" cy="50" r="50" fill="url(#bg)"/>
+
+  <!-- Copper rim -->
+  <circle cx="50" cy="50" r="47" fill="none" stroke="url(#ring)" stroke-width="1.5"/>
+
+  <!-- Monogram "E" constructed from geometric bars -->
+  <!-- Horizontal top -->
+  <rect x="28" y="30" width="22" height="5" rx="1" fill="url(#copper)"/>
+  <!-- Horizontal mid -->
+  <rect x="28" y="47.5" width="18" height="4.5" rx="1" fill="url(#copper)"/>
+  <!-- Horizontal bottom -->
+  <rect x="28" y="65" width="22" height="5" rx="1" fill="url(#copper)"/>
+  <!-- Vertical left spine -->
+  <rect x="28" y="30" width="5" height="40" rx="1" fill="url(#copper)"/>
+
+  <!-- Portafilter handle hint — small circle top-right -->
+  <circle cx="68" cy="36" r="6" fill="none" stroke="url(#copper)" stroke-width="1.5"/>
+  <line x1="62.5" y1="36" x2="55" y2="36" stroke="url(#copper)" stroke-width="1.5" stroke-linecap="round"/>
 </svg>

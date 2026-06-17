@@ -1,33 +1,129 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" style="width: 1200px; height: 630px;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
+    <!-- Espresso Slate background gradient -->
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0A1630"/>
-      <stop offset="100%" stop-color="#0F2145"/>
+      <stop offset="0%"   stop-color="#110d06"/>
+      <stop offset="100%" stop-color="#1a1108"/>
     </linearGradient>
-    <linearGradient id="brand" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#007AFF"/>
-      <stop offset="100%" stop-color="#005BFF"/>
+
+    <!-- Copper-Bronze brand gradient -->
+    <linearGradient id="copper" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#e8c07a"/>
+      <stop offset="50%"  stop-color="#c8883a"/>
+      <stop offset="100%" stop-color="#a06828"/>
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#005BFF" flood-opacity="0.3"/>
+
+    <!-- Crema Gold for subtitle -->
+    <linearGradient id="crema" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#f5dfa0"/>
+      <stop offset="100%" stop-color="#e0b86a"/>
+    </linearGradient>
+
+    <!-- Glow behind card -->
+    <filter id="glow" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Subtle card shadow -->
+    <filter id="card-shadow">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#c8883a" flood-opacity="0.18"/>
     </filter>
   </defs>
 
+  <!-- ── Background ─────────────────────────────────── -->
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <circle cx="1000" cy="100" r="200" fill="#005BFF" opacity="0.1"/>
-  <circle cx="200" cy="530" r="250" fill="#007AFF" opacity="0.08"/>
-  
-  <g filter="url(#shadow)">
-    <rect x="150" y="180" width="900" height="270" rx="20" fill="#1E293B" stroke="#5F6878" stroke-width="2"/>
+
+  <!-- Ambient glow blobs -->
+  <circle cx="980"  cy="110" r="260" fill="#c8883a" opacity="0.07"/>
+  <circle cx="180"  cy="560" r="300" fill="#a06828" opacity="0.06"/>
+  <circle cx="600"  cy="680" r="220" fill="#e8c07a" opacity="0.05"/>
+
+  <!-- Fine grid texture (subtle monochrome lines) -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M40 0 L0 0 0 40" fill="none" stroke="#c8883a" stroke-width="0.3" opacity="0.12"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- ── Left decorative E monogram ─────────────────── -->
+  <g opacity="0.12" transform="translate(54, 190)">
+    <rect x="0"  y="0"   width="52" height="12" rx="2" fill="#c8883a"/>
+    <rect x="0"  y="59"  width="44" height="11" rx="2" fill="#c8883a"/>
+    <rect x="0"  y="118" width="52" height="12" rx="2" fill="#c8883a"/>
+    <rect x="0"  y="0"   width="12" height="130" rx="2" fill="#c8883a"/>
   </g>
 
-  <text x="600" y="270" text-anchor="middle" fill="white" font-family="Exo 2, Inter, Arial, sans-serif" font-size="72" font-weight="800">
-    EEF Online Professional
+  <!-- ── Copper accent line (top) ───────────────────── -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#copper)"/>
+
+  <!-- ── Main card ──────────────────────────────────── -->
+  <rect x="120" y="155" width="960" height="320" rx="6"
+        fill="#1e1509" stroke="#c8883a" stroke-width="1.5" stroke-opacity="0.35"
+        filter="url(#card-shadow)"/>
+
+  <!-- Copper inner glow on card top border -->
+  <rect x="120" y="155" width="960" height="4" rx="3" fill="url(#copper)" opacity="0.6"/>
+
+  <!-- ── Eyebrow tag ─────────────────────────────────── -->
+  <rect x="472" y="195" width="256" height="28" rx="2" fill="#c8883a" opacity="0.15"/>
+  <text x="600" y="215"
+        text-anchor="middle"
+        fill="#e8c07a"
+        font-family="'Exo 2', 'Inter', Arial, sans-serif"
+        font-size="15"
+        font-weight="700"
+        letter-spacing="4">
+    EEF ONLINE PROFESSIONAL
   </text>
-  <text x="600" y="330" text-anchor="middle" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="500">
-    Rezervni delovi za ugostiteljstvo i dom
+
+  <!-- ── Main headline ──────────────────────────────── -->
+  <text x="600" y="310"
+        text-anchor="middle"
+        font-family="'Georgia', 'Times New Roman', serif"
+        font-size="72"
+        font-weight="700"
+        letter-spacing="-1"
+        fill="url(#crema)">
+    Barista Oprema
   </text>
-  <text x="600" y="390" text-anchor="middle" fill="#007AFF" font-family="Exo 2, Inter, Arial, sans-serif" font-size="24" font-weight="700">
-    Barista oprema • Aparati za kafu • Usluge održavanja
+
+  <!-- ── Subheadline ────────────────────────────────── -->
+  <text x="600" y="368"
+        text-anchor="middle"
+        fill="#c8a878"
+        font-family="'Inter', Arial, sans-serif"
+        font-size="26"
+        font-weight="400"
+        letter-spacing="0.5">
+    Burrovi · Analizatori · Mlinske stanice · Pribor
   </text>
+
+  <!-- Copper divider -->
+  <line x1="440" y1="398" x2="760" y2="398" stroke="url(#copper)" stroke-width="1" opacity="0.5"/>
+
+  <!-- ── Bottom tagline ─────────────────────────────── -->
+  <text x="600" y="432"
+        text-anchor="middle"
+        fill="#8a7054"
+        font-family="'Exo 2', 'Inter', Arial, sans-serif"
+        font-size="17"
+        font-weight="600"
+        letter-spacing="3">
+    eop.rs
+  </text>
+
+  <!-- ── Copper accent line (bottom) ───────────────── -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#copper)"/>
+
+  <!-- ── Decorative portafilter silhouette (right) ── -->
+  <g transform="translate(970, 260)" opacity="0.08" fill="#c8883a">
+    <!-- handle -->
+    <rect x="40" y="55" width="90" height="18" rx="9"/>
+    <!-- body -->
+    <ellipse cx="28" cy="64" rx="38" ry="44"/>
+    <!-- spout left -->
+    <path d="M -8 90 Q -20 105 -28 115 L -20 120 Q -10 108 2 94 Z"/>
+    <!-- spout right -->
+    <path d="M 64 90 Q 76 105 84 115 L 76 120 Q 66 108 54 94 Z"/>
+  </g>
 </svg>

@@ -9,23 +9,43 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+import { Coffee } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { CartProvider } from "@/lib/cart";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Stranica nije pronađena</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Stranica koju tražite ne postoji ili je premeštena.
-        </p>
-        <div className="mt-6">
+    <div className="flex min-h-screen items-center justify-center bg-background px-6 py-12 relative overflow-hidden">
+      {/* Background glow blobbies for premium look */}
+      <div className="absolute top-1/4 left-1/4 h-80 w-80 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-accent/5 blur-3xl pointer-events-none" />
+
+      <div className="max-w-md text-center space-y-6 relative z-10">
+        <div className="flex justify-center">
+          <div className="relative flex h-24 w-24 items-center justify-center bg-primary/10 border border-primary/20 rounded-full">
+            <Coffee className="h-10 w-10 text-primary" />
+            <span className="absolute top-1 right-1 h-3 w-3 rounded-full bg-accent animate-ping" />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <h1 className="text-8xl font-display font-black tracking-tight text-primary animate-reveal">
+            404
+          </h1>
+          <h2 className="text-2xl font-display font-bold text-card-foreground">
+            Izgubili smo portafilter.
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground max-w-sm mx-auto">
+            Izgleda da ova stranica ne postoji, ili je pritisak u bojleru opao. Kafa se i dalje kuva
+            na početnoj stranici!
+          </p>
+        </div>
+
+        <div className="pt-4">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center gap-2 bg-primary px-8 py-4 font-display text-xs font-bold uppercase tracking-widest text-primary-foreground transition-all duration-300 hover:bg-accent hover:text-accent-foreground cursor-pointer"
           >
             Nazad na početnu
           </Link>
@@ -81,22 +101,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "EEF Online Professional – Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje. Usluge održavanja i konsultacije.",
       },
-      { name: "keywords", content: "rezervni delovi, aparati za kafu, barista oprema, ugostiteljstvo, domaći uređaji, održavanje" },
+      {
+        name: "keywords",
+        content:
+          "rezervni delovi, aparati za kafu, barista oprema, ugostiteljstvo, domaći uređaji, održavanje",
+      },
       { name: "author", content: "EEF Online Professional" },
       { property: "og:site_name", content: "EEF Online Professional" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
+      {
+        property: "og:title",
+        content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom",
+      },
       {
         property: "og:description",
-        content: "EEF Online Professional – Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje.",
+        content:
+          "EEF Online Professional – Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje.",
       },
-      { property: "og:image", content: "/og-image.svg" },
+      { property: "og:image", content: "/og-image.png" },
       { property: "og:url", content: "https://eop.rs" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom" },
-      { name: "twitter:description", content: "Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje." },
-      { name: "twitter:image", content: "/og-image.svg" },
-      { name: "theme-color", content: "#005BFF" },
+      {
+        name: "twitter:title",
+        content: "EEF Online Professional | Rezervni delovi za ugostiteljstvo i dom",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Vaš pouzdan partner za rezervne delove za ugostiteljstvo, barista opremu, aparate za kafu i domaće uređaje.",
+      },
+      { name: "twitter:image", content: "/og-image.png" },
+      { name: "theme-color", content: "#c8883a" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -115,8 +150,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "EEF Online Professional",
-          description:
-            "Rezervni delovi za ugostiteljstvo, aparate za kafu i domaće uređaje.",
+          description: "Rezervni delovi za ugostiteljstvo, aparate za kafu i domaće uređaje.",
           url: "/",
           telephone: "+381 64 8222 651",
           email: "office@eop.rs",
@@ -129,7 +163,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
 
 function RootShell({ children }: { children: ReactNode }) {
   return (

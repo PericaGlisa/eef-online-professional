@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * EEF Online Professional — Instrument Grade Monochrome design system.
- * Dark, near-monochrome surface with blue accents.
+ * EEF Online Professional — Premium Specialty Coffee design system.
+ * Deep Obsidian / Espresso Slate surfaces with Copper-Bronze & Crema Gold accents.
  */
 
 @theme inline {
@@ -44,45 +44,63 @@
 .dark {
   --radius: 0.25rem;
 
-  --background: oklch(0.196 0.054 264);   /* #0A1630 */
-  --foreground: oklch(0.882 0.024 248);   /* #CBD5E1 */
-  --surface: oklch(0.296 0.039 261);      /* #1E293B */
-  --card: oklch(0.296 0.039 261);
-  --card-foreground: oklch(1 0 0);        /* #FFFFFF headings */
-  --popover: oklch(0.296 0.039 261);
-  --popover-foreground: oklch(1 0 0);
+  /* ── Surfaces ──────────────────────────────────────── */
+  --background: oklch(0.14 0.015 45); /* Deep Obsidian / Espresso Slate */
+  --foreground: oklch(0.9 0.018 60); /* Warm Parchment White */
+  --surface: oklch(0.2 0.015 45); /* Dark Clay / Matte Carbon */
+  --card: oklch(0.2 0.015 45);
+  --card-foreground: oklch(0.97 0.008 60); /* Near-white warm */
+  --popover: oklch(0.2 0.015 45);
+  --popover-foreground: oklch(0.97 0.008 60);
 
-  /* EOP brand blue */
-  --primary: oklch(0.572 0.246 263);      /* #005BFF */
-  --primary-foreground: oklch(1 0 0);
+  /* ── Brand — Copper & Crema ─────────────────────── */
+  --primary: oklch(0.74 0.125 55); /* Metallic Crema / Bronze-Copper */
+  --primary-foreground: oklch(0.12 0.01 45); /* Dark espresso for contrast */
 
-  --secondary: oklch(0.434 0.218 266);    /* #003A9E */
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.296 0.039 261);
-  --muted-foreground: oklch(0.824 0.014 248); /* #C8CDD7 metallic silver */
-  --accent: oklch(0.652 0.216 262);       /* #007AFF - More cohesive with primary blue */
-  --accent-foreground: oklch(0.196 0.054 264);
+  --secondary: oklch(0.55 0.09 50); /* Muted Aged Copper */
+  --secondary-foreground: oklch(0.12 0.01 45);
 
-  --gradient-brand: linear-gradient(135deg, var(--primary), var(--accent));
-  --gradient-deep: linear-gradient(180deg, color-mix(in oklab, var(--background) 85%, black), var(--background));
-  --shadow-brand: 0 20px 60px -20px color-mix(in oklab, var(--primary) 45%, transparent);
+  --muted: oklch(0.2 0.015 45);
+  --muted-foreground: oklch(0.68 0.02 55); /* Warm grey-cream */
+
+  --accent: oklch(0.88 0.05 60); /* Soft Crema Gold / Satin Warm Gold */
+  --accent-foreground: oklch(0.12 0.01 45);
+
+  /* ── Gradients & shadows ────────────────────────── */
+  --gradient-brand: linear-gradient(135deg, oklch(0.74 0.125 55), oklch(0.88 0.05 60));
+  --gradient-deep: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--background) 85%, black),
+    var(--background)
+  );
+  --shadow-brand: 0 20px 60px -20px color-mix(in oklab, var(--primary) 40%, transparent);
 
   --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.494 0.018 257);       /* #5F6878 */
-  --input: oklch(0.494 0.018 257);
-  --ring: oklch(0.572 0.246 263);
+  --border: oklch(0.3 0.02 50); /* Warm dark separator */
+  --input: oklch(0.3 0.02 50);
+  --ring: oklch(0.74 0.125 55); /* Copper focus ring */
 }
 
 @keyframes reveal {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @utility animate-reveal {
@@ -111,4 +129,18 @@
     background: var(--color-primary);
     color: var(--color-primary-foreground);
   }
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }

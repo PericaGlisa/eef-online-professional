@@ -90,8 +90,8 @@ function Services() {
               Kompletno rešenje za sve vaše potrebe.
             </h2>
             <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Od rezervnih delova do profesionalne opreme — sve na jednom mestu,
-              uz podršku stručnjaka koji razumeju vaš biznis.
+              Od rezervnih delova do profesionalne opreme — sve na jednom mestu, uz podršku
+              stručnjaka koji razumeju vaš biznis.
             </p>
           </div>
 
@@ -183,13 +183,9 @@ function Services() {
                 key={step.n}
                 className={`space-y-4 ${i > 0 ? "md:border-l md:border-border md:pl-8" : ""}`}
               >
-                <div className="font-mono text-primary text-[10px] md:text-xs">
-                  [ {step.n} ]
-                </div>
+                <div className="font-mono text-primary text-[10px] md:text-xs">[ {step.n} ]</div>
                 <h3 className="text-lg font-bold tracking-tight">{step.h}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {step.p}
-                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{step.p}</p>
               </div>
             ))}
           </div>
@@ -206,8 +202,8 @@ function Services() {
             Kontaktirajte nas i započnimo saradnju.
           </h2>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Bez obzira da li vam treba jedan rezervni deo ili kompletno
-            rešenje za vaš objekat — mi smo tu za vas.
+            Bez obzira da li vam treba jedan rezervni deo ili kompletno rešenje za vaš objekat — mi
+            smo tu za vas.
           </p>
           <Link
             to="/contact"

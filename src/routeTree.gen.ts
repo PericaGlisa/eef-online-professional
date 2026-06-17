@@ -14,6 +14,8 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProdavnicaRouteImport } from './routes/prodavnica'
 import { Route as ONamaRouteImport } from './routes/o-nama'
 import { Route as NaplataRouteImport } from './routes/naplata'
+import { Route as GarancijaIPovratRouteImport } from './routes/garancija-i-povrat'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
@@ -44,6 +46,16 @@ const NaplataRoute = NaplataRouteImport.update({
   path: '/naplata',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GarancijaIPovratRoute = GarancijaIPovratRouteImport.update({
+  id: '/garancija-i-povrat',
+  path: '/garancija-i-povrat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -69,6 +81,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/garancija-i-povrat': typeof GarancijaIPovratRoute
   '/naplata': typeof NaplataRoute
   '/o-nama': typeof ONamaRoute
   '/prodavnica': typeof ProdavnicaRoute
@@ -80,6 +94,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/garancija-i-povrat': typeof GarancijaIPovratRoute
   '/naplata': typeof NaplataRoute
   '/o-nama': typeof ONamaRoute
   '/prodavnica': typeof ProdavnicaRoute
@@ -92,6 +108,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/garancija-i-povrat': typeof GarancijaIPovratRoute
   '/naplata': typeof NaplataRoute
   '/o-nama': typeof ONamaRoute
   '/prodavnica': typeof ProdavnicaRoute
@@ -105,6 +123,8 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/faq'
+    | '/garancija-i-povrat'
     | '/naplata'
     | '/o-nama'
     | '/prodavnica'
@@ -116,6 +136,8 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/faq'
+    | '/garancija-i-povrat'
     | '/naplata'
     | '/o-nama'
     | '/prodavnica'
@@ -127,6 +149,8 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/faq'
+    | '/garancija-i-povrat'
     | '/naplata'
     | '/o-nama'
     | '/prodavnica'
@@ -139,6 +163,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
+  GarancijaIPovratRoute: typeof GarancijaIPovratRoute
   NaplataRoute: typeof NaplataRoute
   ONamaRoute: typeof ONamaRoute
   ProdavnicaRoute: typeof ProdavnicaRoute
@@ -184,6 +210,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NaplataRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/garancija-i-povrat': {
+      id: '/garancija-i-povrat'
+      path: '/garancija-i-povrat'
+      fullPath: '/garancija-i-povrat'
+      preLoaderRoute: typeof GarancijaIPovratRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -219,6 +259,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
+  GarancijaIPovratRoute: GarancijaIPovratRoute,
   NaplataRoute: NaplataRoute,
   ONamaRoute: ONamaRoute,
   ProdavnicaRoute: ProdavnicaRoute,
