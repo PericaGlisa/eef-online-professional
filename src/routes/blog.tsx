@@ -21,44 +21,44 @@ export const Route = createFileRoute("/blog")({
 
 const POSTS = [
   {
-    tag: "KALIBRACIJA",
-    title: "Kako pravilno kalibrisati burr sečiva na profesionalnom mlinu",
+    tag: "ODRŽAVANJE VODE",
+    title: "Zašto je omekšivač vode najvažniji dodatak vašem espresso aparatu",
     excerpt:
-      "Vodič kroz mikronsko podešavanje rastojanja noževa i pronalaženje nulte tačke za ujednačenu ekstrakciju.",
+      "Kamenac je neprijatelj broj jedan ugostiteljske opreme. Saznajte kako pravilna filtracija vode produžava vek trajanja vaših aparata.",
     content:
-      "Kalibracija burrova (sečiva) na mlinu je osnova za postizanje konzistentnog espressa. Prvi korak je pronalaženje fizičke nulte tačke (tačka u kojoj se noževi dodiruju).\n\nKada mlin isključite iz struje, lagano okrećite podešivač granulacije dok ne osetite blagi otpor pri ručnom okretanju pogonskog vratila. Od te tačke vratite podešivač unazad za preporučeni broj mikrona (obično 10-15 mikrona za espresso).\n\nRedovno čišćenje sečiva i provera istrošenosti osiguravaju da nema odstupanja u toku rada. Kod ugradnje novih noževa, preporučljivo je proći kroz fazu 'seasoninga' (slično razrađivanju novog motora) sa 2-5kg stare kafe, kako bi se uklonile neravnine sa ivica i postigla stabilna distribucija granulacije.",
+      "Tvrda voda sadrži visok nivo kalcijuma i magnezijuma, koji se pri zagrevanju talože u obliku kamenca unutar bojlera, cevi i ventila espresso aparata. Ovo ne samo da smanjuje protok vode i pritisak, već može dovesti do ozbiljnih kvarova i skupih popravki.\n\nRedovna zamena filtera i korišćenje profesionalnih omekšivača vode (depuratora) su ključni za stabilan rad. Pored zaštite same opreme, pravilno filtrirana voda direktno utiče na kvalitet i ukus kafe koju služite vašim gostima, jer eliminiše neželjene mirise i hlor.",
     date: "12.05.2026.",
+    read: "5 min",
+  },
+  {
+    tag: "REZERVNI DELOVI",
+    title: "Originalni vs. zamenski delovi: Šta izabrati za vašu ugostiteljsku opremu?",
+    excerpt:
+      "Da li se ušteda na jeftinijim zamenskim delovima isplati na duže staze? Analiziramo prednosti korišćenja kvalitetnih komponenti.",
+    content:
+      "Kada dođe do kvara na termičkoj ili rashladnoj opremi, brzina popravke je ključna za kontinuitet poslovanja. Međutim, izbor ugrađenih delova je jednako važan.\n\nOriginalni (OEM) delovi garantuju potpunu kompatibilnost i fabričke performanse. Iako visokokvalitetni zamenski delovi iz Evrope mogu biti odlična i ekonomična alternativa, treba izbegavati neproverene komponente. U EEF Online Professional ponudi fokusiramo se isključivo na proverene rezervne delove koji osiguravaju pouzdanost i sigurnost u najzahtevnijim profesionalnim uslovima rada.",
+    date: "04.04.2026.",
+    read: "7 min",
+  },
+  {
+    tag: "HIGIJENA",
+    title: "Pravilna upotreba hemije za čišćenje espresso aparata i mlinova",
+    excerpt:
+      "Vodič za svakodnevno i nedeljno održavanje higijene vaše opreme uz pomoć profesionalnih preparata.",
+    content:
+      "Profesionalna higijena šanka ne podrazumeva samo brisanje radnih površina. Espresso aparati zahtevaju svakodnevno čišćenje radnih grupa (backflush) pomoću specijalizovanog praška ili tableta koje efikasno rastvaraju nakupljena ulja kafe.\n\nPored aparata, ne smemo zaboraviti ni mlinove. Korišćenje granula za čišćenje mlinova uklanja zaostala užegla ulja sa noževa bez potrebe za rasklapanjem celog uređaja. Redovno korišćenje profesionalne hemije ne samo da održava opremu ispravnom, već garantuje da svaka šoljica kafe ima savršen, čist ukus.",
+    date: "18.04.2026.",
     read: "6 min",
   },
   {
-    tag: "EKSTRAKCIJA / TEHNOLOGIJA",
-    title: "EBC vs Agtron: Razlika u merenju prženja i ekstrakcije kafe",
+    tag: "SERVIS",
+    title: "5 najčešćih znakova da vaš aparat za kafu treba hitan servis",
     excerpt:
-      "Analiza dva vodeća industrijska standarda za merenje spektralne refleksije svetlosti na samlevenoj kafi.",
+      "Naučite da prepoznate rane simptome kvara pre nego što dođe do potpunog zastoja u radu vašeg restorana ili kafića.",
     content:
-      "Dok je EBC (European Brewery Convention) standard primarno nastao u industriji piva i koristi se za merenje boje i mutnoće tečnosti (uključujući espresso napitke), Agtron je zlatni standard za merenje nivoa prženosti kafe u zrnu ili u prahu.\n\nAgtron meri spektralnu refleksiju svetlosti u bliskom infracrvenom spektru (Near-Infrared - NIR). Što je broj manji (npr. Agtron 35), kafa je tamnije pržena, dok veći brojevi (npr. Agtron 75) označavaju svetlije prženje.\n\nRazumevanje obe skale omogućava pržionicama i ugostiteljima precizno mapiranje ujednačenosti profila i ekstrakcije kafe.",
-    date: "04.04.2026.",
-    read: "9 min",
-  },
-  {
-    tag: "ODRŽAVANJE",
-    title: "Kako pravilno održavati aparate za kafu i produžiti im vek trajanja.",
-    excerpt:
-      "Saveti za redovno čišćenje, zamenu filtera i održavanje aparata kako bi imali maksimalne performanse godinama.",
-    content:
-      "Održavanje espresso aparata zahteva dnevnu, nedeljnu i mesečnu rutinu. Svakodnevno je potrebno raditi backflush slepim sitom i namenskim praškom (poput Cafiza) kako bi se uklonila nakupljena ulja kafe iz grupe.\n\nNedeljno čistite portafiltere i sita potapanjem u rastvor praška i tople vode. Mesečno proveravajte pritisak pumpe i stanje filtera za vodu (BWT/Brita), jer je tvrda voda najveći neprijatelj grejača i ventila. Kamenac može trajno smanjiti protok i oštetiti osetljive mesingane i bakarne komponente aparata.",
-    date: "18.04.2026.",
-    read: "8 min",
-  },
-  {
-    tag: "SAVETI",
-    title: "Koju opremu treba svaki profesionalni kafić da ima u 2026. godini.",
-    excerpt:
-      "Kompletna lista opreme od osnovnih aparata do naprednih rešenja za kvalitet i efikasnost u radu.",
-    content:
-      "Pored vrhunskog espresso aparata sa stabilnom temperaturom (saturisane grupe), moderan kafić u 2026. mora imati kvalitetan mlin sa flat noževima prečnika preko 80 mm za ujednačenu distribuciju čestica.\n\nTakođe, obavezni su WDT alati za distribuciju kafe u portafilteru kako bi se sprečilo kanalisanje (channeling), i pouzdan sistem za filtraciju vode koji garantuje optimalan mineralni sastav za ekstrakciju slatkih tonova kafe. Razmislite o uvođenju preciznih vaga i alata kako biste osigurali da svaki barista služi isti kvalitet.",
+      "Pravovremeno prepoznavanje problema može vam uštedeti mnogo novca i stresa. Ako primetite pad pritiska na manometru prilikom ekstrakcije, to može ukazivati na problem sa pumpom ili zapušenje u sistemu.\n\nCurenje vode oko portafiltera najčešće znači da je vreme za zamenu silikonske ili gumene zaptivke (dihtunga) na grupi. Neobični zvuci, oscilacije u temperaturi ili pojava pare tamo gde ne bi trebalo da je bude, jasni su signali da je vašem aparatu potreban stručan pregled i adekvatan rezervni deo iz naše ponude.",
     date: "02.03.2026.",
-    read: "10 min",
+    read: "8 min",
   },
 ];
 
