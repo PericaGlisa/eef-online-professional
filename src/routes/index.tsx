@@ -336,6 +336,38 @@ function Home() {
         </div>
       </section>
 
+      {/* Brand Ticker */}
+      <section className="py-16 border-b border-border bg-surface/10 overflow-hidden reveal-on-scroll">
+        <div className="max-w-7xl mx-auto px-6 mb-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent text-center">
+            [ Podržani brendovi i sistemi ]
+          </div>
+        </div>
+        <div className="relative flex overflow-x-hidden border-y border-border/30 bg-background/50 py-6">
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(4)]
+              .flatMap(() => [
+                "Mazzer",
+                "Anfim",
+                "Victoria Arduino",
+                "La Marzocco",
+                "Mahlkönig",
+                "Sanremo",
+                "BWT",
+                "Brita",
+              ])
+              .map((brand, idx) => (
+                <span
+                  key={idx}
+                  className="mx-8 font-display text-2xl md:text-3xl font-bold tracking-widest text-muted-foreground/30 hover:text-primary transition-all duration-300 cursor-default uppercase"
+                >
+                  {brand} <span className="text-primary/30 ml-8 font-sans text-lg">•</span>
+                </span>
+              ))}
+          </div>
+        </div>
+      </section>
+
       {/* Premium 2-Column Services Grid with All Buttons */}
       <section className="border-b border-border bg-background py-16 md:py-24 reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -464,38 +496,6 @@ function Home() {
                 />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Brand Ticker */}
-      <section className="py-16 border-b border-border bg-surface/10 overflow-hidden reveal-on-scroll">
-        <div className="max-w-7xl mx-auto px-6 mb-6">
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent text-center">
-            [ Podržani brendovi i sistemi ]
-          </div>
-        </div>
-        <div className="relative flex overflow-x-hidden border-y border-border/30 bg-background/50 py-6">
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...Array(4)]
-              .flatMap(() => [
-                "Mazzer",
-                "Anfim",
-                "Victoria Arduino",
-                "La Marzocco",
-                "Mahlkönig",
-                "Sanremo",
-                "BWT",
-                "Brita",
-              ])
-              .map((brand, idx) => (
-                <span
-                  key={idx}
-                  className="mx-8 font-display text-2xl md:text-3xl font-bold tracking-widest text-muted-foreground/30 hover:text-primary transition-all duration-300 cursor-default uppercase"
-                >
-                  {brand} <span className="text-primary/30 ml-8 font-sans text-lg">•</span>
-                </span>
-              ))}
           </div>
         </div>
       </section>
