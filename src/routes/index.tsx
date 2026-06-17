@@ -349,13 +349,13 @@ function Home() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {/* Hero service (1st) - Large prominent card */}
+            {/* Hero service (1st) - Smaller card */}
             {SERVICE_TILES.slice(0, 1).map((service) => (
               <article
                 key={service.title}
-                className="group relative overflow-hidden border-2 border-primary/40 bg-background md:col-span-2 hover:border-primary/80 transition-all duration-300"
+                className="group relative overflow-hidden border-2 border-primary/40 bg-background hover:border-primary/80 transition-all duration-300"
               >
-                <div className="relative aspect-[4/5] sm:aspect-[16/10] md:aspect-[16/9]">
+                <div className="relative aspect-[4/5] sm:aspect-[16/10]">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -363,25 +363,25 @@ function Home() {
                     className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10 lg:p-12">
-                    <div className="mb-4 md:mb-6 inline-flex h-16 md:h-20 w-16 md:w-20 items-center justify-center bg-primary/20 backdrop-blur-md border border-primary/30">
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 lg:p-8">
+                    <div className="mb-3 md:mb-4 inline-flex h-12 md:h-14 w-12 md:w-14 items-center justify-center bg-primary/20 backdrop-blur-md border border-primary/30">
                       <service.icon
-                        className="h-7 md:h-10 w-7 md:w-10 text-primary"
+                        className="h-5 md:h-7 w-5 md:w-7 text-primary"
                         aria-hidden="true"
                       />
                     </div>
-                    <h3 className="mb-3 md:mb-4 text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-card-foreground">
+                    <h3 className="mb-2 text-xl md:text-2xl font-black tracking-tight text-card-foreground">
                       {service.title}
                     </h3>
-                    <p className="max-w-xl text-sm md:text-base lg:text-lg leading-relaxed text-foreground/85">
+                    <p className="text-sm leading-relaxed text-foreground/80 mb-3 md:mb-4">
                       {service.body}
                     </p>
                     <Link
                       to="/services"
-                      className="mt-6 md:mt-8 inline-flex items-center gap-2 md:gap-3 bg-primary text-primary-foreground px-6 md:px-8 py-3 md:py-4 font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] transition-all hover:bg-accent hover:text-accent-foreground"
+                      className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-accent transition-all hover:text-primary"
                     >
                       Saznaj više
-                      <ChevronRight className="h-3 md:h-4 w-3 md:w-4" />
+                      <ChevronRight className="h-3 w-3 md:h-3.5 md:w-3.5" />
                     </Link>
                   </div>
                 </div>

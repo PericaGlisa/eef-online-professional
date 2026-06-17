@@ -118,7 +118,7 @@ function ProductPage() {
 
       {/* Hero Image */}
       <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="max-w-4xl mx-auto px-6 py-16">
           <img
             src={product.image}
             alt={product.name}
