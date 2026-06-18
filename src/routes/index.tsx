@@ -395,39 +395,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="border-b border-border bg-background py-16 md:py-24 reveal-on-scroll">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="mb-12 text-center">
-            <div className="mb-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-accent">
-              [ Zašto baš mi ]
-            </div>
-            <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-card-foreground">
-              Prednosti koje ćete zavoljeti.
-            </h2>
-          </div>
-          
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <div key={index} className="flex flex-col items-center text-center">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                    <Icon className="h-8 w-8" />
-                  </div>
-                  <h3 className="mb-3 font-display text-lg font-bold tracking-tight text-card-foreground">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {feature.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Premium 2-Column Services Grid with All Buttons */}
       <section className="border-b border-border bg-background py-16 md:py-24 reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -518,6 +485,39 @@ function Home() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="border-b border-border bg-background py-16 md:py-24 reveal-on-scroll">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mb-12 text-center">
+            <div className="mb-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-accent">
+              [ Zašto baš mi ]
+            </div>
+            <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-card-foreground">
+              Prednosti koje ćete zavoleti.
+            </h2>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div key={index} className="flex flex-col items-center text-center">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="mb-3 font-display text-lg font-bold tracking-tight text-card-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

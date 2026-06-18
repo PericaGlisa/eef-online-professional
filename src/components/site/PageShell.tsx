@@ -57,15 +57,15 @@ export function PageShell({ children }: { children: ReactNode }) {
 
       {/* WhatsApp Contact Selector Modal */}
       {whatsappModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-end justify-center sm:items-center sm:justify-end p-4 sm:p-6">
+        <div className="fixed inset-0 z-[60]">
           {/* Backdrop */}
           <div 
             className="absolute inset-0 bg-black/50" 
             onClick={() => setWhatsappModalOpen(false)}
           />
           
-          {/* Modal Content */}
-          <div className="relative bg-background rounded-2xl shadow-2xl border border-border w-full max-w-sm sm:mr-0">
+          {/* Modal Content positioned above widget */}
+          <div className="absolute bottom-28 right-6 bg-background rounded-2xl shadow-2xl border border-border w-full max-w-sm">
             <div className="flex items-center justify-between p-6 border-b border-border">
               <div>
                 <h3 className="font-display font-bold text-lg tracking-tight">Odaberite osobu za kontakt</h3>
