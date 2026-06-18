@@ -65,7 +65,7 @@ export function PageShell({ children }: { children: ReactNode }) {
           />
           
           {/* Modal Content positioned above widget */}
-          <div className="absolute bottom-28 right-6 bg-background rounded-2xl shadow-2xl border border-border w-full max-w-sm">
+          <div className="absolute bottom-28 left-4 right-4 sm:left-auto sm:right-6 bg-background rounded-2xl shadow-2xl border border-border max-w-sm">
             <div className="flex items-center justify-between p-6 border-b border-border">
               <div>
                 <h3 className="font-display font-bold text-lg tracking-tight">Odaberite osobu za kontakt</h3>
