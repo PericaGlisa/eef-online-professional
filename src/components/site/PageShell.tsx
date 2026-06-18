@@ -109,9 +109,9 @@ export function PageShell({ children }: { children: ReactNode }) {
         className="fixed bottom-6 right-6 z-[50] flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-accent hover:text-accent-foreground hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background group"
         aria-label="Kontaktirajte nas preko WhatsApp-a"
       >
-        {/* Pulsating effect */}
-        <span className="absolute animate-ping rounded-full bg-primary/75 h-16 w-16 opacity-75"></span>
-        <span className="absolute animate-pulse rounded-full bg-primary/50 h-18 w-18 opacity-50"></span>
+        {/* Elegant wave/ripple effect */}
+        <span className="absolute animate-whatsapp-wave rounded-full bg-primary/70 h-14 w-14"></span>
+        <span className="absolute animate-whatsapp-wave rounded-full bg-primary/50 h-14 w-14" style={{ animationDelay: '0.8s' }}></span>
         
         <span className="absolute right-16 scale-0 bg-surface border border-border px-3 py-1.5 rounded text-[10px] font-mono uppercase tracking-widest text-foreground whitespace-nowrap opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 pointer-events-none shadow-md">
           WhatsApp Kontakt
