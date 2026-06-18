@@ -13,6 +13,10 @@ import {
   Wrench,
   Zap,
   ChevronRight,
+  CheckCircle2,
+  Clock,
+  Truck,
+  Award,
 } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { useReveal } from "@/hooks/useReveal";
@@ -134,6 +138,29 @@ const GALLERY_IMAGES = [
   { src: g8 },
   { src: g9 },
   { src: g10 },
+];
+
+const FEATURES = [
+  {
+    title: "Originalni delovi",
+    description: "Samo originalni rezervni delovi direktno od proizvođača za maksimalnu performansu.",
+    icon: CheckCircle2,
+  },
+  {
+    title: "Brza isporuka",
+    description: "Isporuka u roku od 24-48 časa za sve standardne porudžbine.",
+    icon: Truck,
+  },
+  {
+    title: "Kvalitet garantovan",
+    description: "Svaki proizvod prolazi strogu kontrolu kvaliteta pre izlaska.",
+    icon: Award,
+  },
+  {
+    title: "Stručna podrška",
+    description: "Tim stručnjaka je tu da pomogne sa izborom i instalacijom.",
+    icon: Clock,
+  },
 ];
 
 const SLIDE_INTERVAL = 7000;
@@ -364,6 +391,39 @@ function Home() {
                   {brand} <span className="text-primary/30 ml-8 font-sans text-lg">•</span>
                 </span>
               ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="border-b border-border bg-background py-16 md:py-24 reveal-on-scroll">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mb-12 text-center">
+            <div className="mb-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-accent">
+              [ Zašto baš mi ]
+            </div>
+            <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-card-foreground">
+              Prednosti koje ćete zavoljeti.
+            </h2>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div key={index} className="flex flex-col items-center text-center">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="mb-3 font-display text-lg font-bold tracking-tight text-card-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
